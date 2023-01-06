@@ -22,9 +22,30 @@ TODO: Write usage instructions here
 
 ## Development
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+After checking out the repo, run `bin/setup` to install dependencies.
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and the created tag, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+To install this gem onto your local machine, run `bundle exec rake install`.
+
+You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+
+To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`,
+which will create a git tag for the version, push git commits and the created tag, and push the `.gem` file
+to [rubygems.org](https://rubygems.org).
+
+The health and maintainability of the codebase is ensured through a set of
+Rake tasks to test, lint and audit the gem for security vulnerabilities and documentation:
+
+```
+rake bundle:audit          # Checks for vulnerable versions of gems
+rake qa                    # Test, lint and perform security and documentation audits
+rake rubocop               # Lint the codebase with RuboCop
+rake rubocop:auto_correct  # Auto-correct RuboCop offenses
+rake spec                  # Run RSpec code examples
+rake verify_measurements   # Verify that yardstick coverage is at least 100%
+rake yard                  # Generate YARD Documentation
+rake yard:junk             # Check the junk in your YARD Documentation
+rake yardstick_measure     # Measure docs in lib/**/*.rb with yardstick
+```
 
 ## Contributing
 
