@@ -4,7 +4,12 @@ require 'pry'
 require 'simplecov'
 require 'simplecov-console'
 
-SimpleCov.formatter = SimpleCov::Formatter::Console unless ENV['COVERAGE_FORMAT'] == 'html'
+SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new(
+  [
+    SimpleCov::Formatter::HTMLFormatter,
+    SimpleCov::Formatter::Console
+  ]
+)
 
 unless ENV['COVERAGE'] == 'false'
   SimpleCov.start do
