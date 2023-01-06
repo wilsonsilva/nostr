@@ -1,7 +1,7 @@
 # Nostr
 
 [![Gem Version](https://badge.fury.io/rb/nostr.svg)](https://badge.fury.io/rb/nostr)
-[![Inline docs](http://inch-ci.org/github/wilsonsilva/nostr.svg?branch=master)](http://inch-ci.org/github/wilsonsilva/nostr)
+[![Inline docs](http://inch-ci.org/github/wilsonsilva/nostr.svg?branch=main)](http://inch-ci.org/github/wilsonsilva/nostr)
 
 Nostr client. Please note that the API is likely to change as the gem is still in development and has not yet reached a
 stable release. Use with caution.
