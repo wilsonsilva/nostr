@@ -1,23 +1,23 @@
 # frozen_string_literal: true
 
-require_relative "lib/nostr/version"
+require_relative 'lib/nostr/version'
 
 Gem::Specification.new do |spec|
-  spec.name = "nostr"
+  spec.name = 'nostr'
   spec.version = Nostr::VERSION
-  spec.authors = ["Wilson Silva"]
-  spec.email = ["wilson.dsigns@gmail.com"]
+  spec.authors = ['Wilson Silva']
+  spec.email = ['wilson.dsigns@gmail.com']
 
-  spec.summary = "Client and relay implementation of the Nostr protocol."
-  spec.description = "Client and relay implementation of the Nostr protocol."
-  spec.homepage = "https://github.com/wilsonsilva/nostr"
-  spec.license = "MIT"
-  spec.required_ruby_version = ">= 3.2.0"
-  spec.metadata["rubygems_mfa_required"] = "true"
+  spec.summary = 'Client and relay implementation of the Nostr protocol.'
+  spec.description = 'Client and relay implementation of the Nostr protocol.'
+  spec.homepage = 'https://github.com/wilsonsilva/nostr'
+  spec.license = 'MIT'
+  spec.required_ruby_version = '>= 3.2.0'
+  spec.metadata['rubygems_mfa_required'] = 'true'
 
-  spec.metadata["homepage_uri"] = spec.homepage
-  spec.metadata["source_code_uri"] = "https://github.com/wilsonsilva/nostr"
-  spec.metadata["changelog_uri"] = "https://github.com/wilsonsilva/nostr/blob/master/CHANGELOG.md"
+  spec.metadata['homepage_uri'] = spec.homepage
+  spec.metadata['source_code_uri'] = 'https://github.com/wilsonsilva/nostr'
+  spec.metadata['changelog_uri'] = 'https://github.com/wilsonsilva/nostr/blob/master/CHANGELOG.md'
 
   # Specify which files should be added to the gem when it is released.
   # The `git ls-files -z` loads the files in the RubyGem that have been added into git.
@@ -27,12 +27,12 @@ Gem::Specification.new do |spec|
     end
   end
 
-  spec.bindir = "exe"
+  spec.bindir = 'exe'
   spec.executables = spec.files.grep(%r{\Aexe/}) { |f| File.basename(f) }
-  spec.require_paths = ["lib"]
+  spec.require_paths = ['lib']
 
-  spec.add_development_dependency "rake", "~> 13.0"
-  spec.add_development_dependency "rspec", "~> 3.12"
-  spec.add_development_dependency "rubocop", "~> 1.42"
-  spec.add_development_dependency "rubocop-rspec", "2.16"
+  spec.add_development_dependency 'rake', '~> 13.0'
+  spec.add_development_dependency 'rspec', '~> 3.12'
+  spec.add_development_dependency 'rubocop', '~> 1.42'
+  spec.add_development_dependency 'rubocop-rspec', '2.16'
 end
