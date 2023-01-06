@@ -13,6 +13,7 @@ Gem::Specification.new do |spec|
   spec.homepage = "https://github.com/wilsonsilva/nostr"
   spec.license = "MIT"
   spec.required_ruby_version = ">= 3.2.0"
+  spec.metadata["rubygems_mfa_required"] = "true"
 
   spec.metadata["homepage_uri"] = spec.homepage
   spec.metadata["source_code_uri"] = "https://github.com/wilsonsilva/nostr"
@@ -33,4 +34,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rake", "~> 13.0"
   spec.add_development_dependency "rspec", "~> 3.12"
   spec.add_development_dependency "rubocop", "~> 1.42"
+  spec.add_development_dependency "rubocop-rspec", "2.16"
 end

@@ -1,13 +1,33 @@
+require: rubocop-rspec
+
 AllCops:
   TargetRubyVersion: 3.2
+  DisplayCopNames: true
+  NewCops: enable
+
+# ----------------------- Style -----------------------
 
 Style/StringLiterals:
   Enabled: true
-  EnforcedStyle: double_quotes
+  EnforcedStyle: single_quotes
 
 Style/StringLiteralsInInterpolation:
   Enabled: true
   EnforcedStyle: double_quotes
 
+# ----------------------- Layout ----------------------
+
 Layout/LineLength:
   Max: 120
+
+# ---------------------- Metrics ----------------------
+
+Metrics/BlockLength:
+  Exclude:
+    - '**/*_spec.rb'
+    - nostr.gemspec
+
+# ----------------------- RSpec -----------------------
+
+RSpec/ExampleLength:
+  Enabled: false
