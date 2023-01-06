@@ -5,4 +5,10 @@ set -vx
 
 bundle install
 
-# Do any other automated setup that you need to do here
+if ! which overcommit >/dev/null; then
+  echo 'The gem overcommit is not installed. It is necessary to lint the git history through git hooks.'
+  echo 'Please install overcommit and run this script again.'
+  exit 1
+fi
+
+overcommit --install
