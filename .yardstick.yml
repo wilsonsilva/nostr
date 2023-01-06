@@ -1,0 +1,22 @@
+threshold: 100
+rules:
+  ApiTag::Presence:
+    enabled: true
+  ApiTag::Inclusion:
+    enabled: true
+  ApiTag::ProtectedMethod:
+    enabled: true
+  ApiTag::PrivateMethod:
+    enabled: true
+  ExampleTag:
+    enabled: true
+  ReturnTag:
+    enabled: true
+  Summary::Presence:
+    enabled: true
+  Summary::Length:
+    enabled: false
+  Summary::Delimiter:
+    enabled: true
+  Summary::SingleLine:
+    enabled: false
