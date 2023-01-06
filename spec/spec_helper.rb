@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require 'nostr'
 require 'pry'
 require 'simplecov'
 require 'simplecov-console'
@@ -13,6 +12,8 @@ unless ENV['COVERAGE'] == 'false'
     coverage_dir "#{Dir.pwd}/coverage"
   end
 end
+
+require 'nostr'
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
