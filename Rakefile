@@ -34,3 +34,6 @@ task :coverage do
   Rake::Task['spec'].execute
   `open coverage/index.html`
 end
+
+desc 'Test, lint and perform security and documentation audits'
+task qa: %w[spec rubocop yard:junk verify_measurements bundle:audit]
