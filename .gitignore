@@ -12,3 +12,9 @@
 # rspec failure tracking
 .rspec_status
 /Gemfile.lock
+
+# Local dotenv files
+.env.development.local
+.env.test.local
+.env.production.local
+.env.local

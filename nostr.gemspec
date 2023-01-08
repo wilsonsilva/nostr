@@ -32,6 +32,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = ['lib']
 
   spec.add_development_dependency 'bundler-audit', '~> 0.9'
+  spec.add_development_dependency 'dotenv', '~> 2.8'
   spec.add_development_dependency 'guard', '~> 2.18'
   spec.add_development_dependency 'guard-bundler', '~> 3.0'
   spec.add_development_dependency 'guard-bundler-audit', '~> 0.1'
