@@ -4,8 +4,8 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/c7633eb2c89eb95ee7f2/maintainability)](https://codeclimate.com/github/wilsonsilva/nostr/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/c7633eb2c89eb95ee7f2/test_coverage)](https://codeclimate.com/github/wilsonsilva/nostr/test_coverage)
 
-Nostr client. Please note that the API is likely to change as the gem is still in development and has not yet reached a
-stable release. Use with caution.
+Asynchronous Nostr client. Please note that the API is likely to change as the gem is still in development and
+has not yet reached a stable release. Use with caution.
 
 ## Installation
 
@@ -19,9 +19,170 @@ If bundler is not being used to manage dependencies, install the gem by executin
 
 ## Usage
 
+### Requiring the gem
+
+All examples below assume that the gem has been required.
+
 ```ruby
 require 'nostr'
 ```
+
+
+### Generating a keypair
+
+```ruby
+keygen  = Nostr::Keygen.new
+keypair = keygen.generate_keypair
+
+keypair.private_key
+keypair.public_key
+```
+
+### Generating a private key and a public key
+
+```ruby
+keygen  = Nostr::Keygen.new
+
+private_key = keygen.generate_private_key
+public_key  = keygen.extract_public_key(private_key)
+```
+
+### Connecting to a Relay
+
+Clients can connect to multiple Relays. In this version, a Client can only connect to a single Relay at a time.
+
+You may instantiate multiple Clients and multiple Relays.
+
+```ruby
+client = Nostr::Client.new
+relay = Nostr::Relay.new(url: 'wss://relay.damus.io', name: 'Damus')
+
+client.connect(relay)
+```
+
+### WebSocket events
+
+All communication between clients and relays happen in WebSockets.
+
+The `:connect` event is fired when a connection with a WebSocket is opened. You must call `Nostr::Client#connect` first.
+
+```ruby
+client.on :connect do
+  # all the code goes here
+end
+```
+
+The `:close` event is fired when a connection with a WebSocket has been closed because of an error.
+
+```ruby
+client.on :error do |error_message|
+  puts error_message
+end
+
+# > Network error: wss://rsslay.fiatjaf.com: Unable to verify the server certificate for 'rsslay.fiatjaf.com'
+```
+
+The `:message` event is fired whenwhen data is received through a WebSocket.
+
+```ruby
+client.on :message do |message|
+  puts message
+end
+
+# > Network error: wss://rsslay.fiatjaf.com: Unable to verify the server certificate for 'rsslay.fiatjaf.com'
+```
+
+The `:close` event is fired when a connection with a WebSocket is closed.
+
+```ruby
+client.on :close do |code, reason|
+  # you may attempt to reconnect
+
+  client.connect(relay)
+end
+```
+
+### Requesting for events / creating a subscription
+
+A client can request events and subscribe to new updates after it has established a connection with the Relay.
+
+You may use a `Nostr::Filter` instance with as many attributes as you wish:
+
+```ruby
+client.on :connect do
+  filter = Nostr::Filter.new(
+    ids: ['8535d5e2d7b9dc07567f676fbe70428133c9884857e1915f5b1cc6514c2fdff8'],
+    authors: ['ae00f88a885ce76afad5cbb2459ef0dcf0df0907adc6e4dac16e1bfbd7074577'],
+    kinds: [Nostr::EventKind::TEXT_NOTE],
+    e: ["f111593a72cc52a7f0978de5ecf29b4653d0cf539f1fa50d2168fc1dc8280e52"],
+    p: ["f1f9b0996d4ff1bf75e79e4cc8577c89eb633e68415c7faf74cf17a07bf80bd8"],
+    since: 1230981305,
+    until: 1292190341,
+    limit: 420,
+  )
+
+  subscription = client.subscribe('a_random_subscription_id', filter)
+end
+```
+
+With just a few:
+
+```ruby
+client.on :connect do
+  filter = Nostr::Filter.new(kinds: [Nostr::EventKind::TEXT_NOTE])
+  subscription = client.subscribe('a_random_subscription_id', filter)
+end
+```
+
+Or omit the filter:
+
+```ruby
+client.on :connect do
+  subscription = client.subscribe('a_random_subscription_id')
+end
+```
+
+Or even omit the subscription id:
+
+```ruby
+client.on :connect do
+  subscription = client.subscribe('a_random_subscription_id')
+end
+```
+
+### Stop previous subscriptions
+
+You can stop receiving messages from a subscription by calling `#unsubscribe`:
+
+```ruby
+client.unsubscribe('your_subscription_id')
+```
+
+### Publishing an event
+
+To publish an event you need a keypair.
+
+```ruby
+# Set up the private key
+private_key = 'a630b06e2f883378d0aa335b9adaf7734603e00433350b684fe53e184f08c58f'
+user = Nostr::User.new(private_key)
+
+# Create a signed event
+event = user.create_event(
+  created_at: 1667422587, # optional, defaults to the current time
+  kind: Nostr::EventKind::TEXT_NOTE,
+  tags: [], # optional, defaults to []
+  content: 'Your feedback is appreciated, now pay $8'
+)
+
+# Send it to the Relay
+client.publish(event)
+```
+
+## NIPS
+
+- [x] [NIP-01 - Client](https://github.com/nostr-protocol/nips/blob/master/01.md)
+- [ ] [NIP-01 - Relay](https://github.com/nostr-protocol/nips/blob/master/01.md)
 
 ## Development
 
