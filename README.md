@@ -200,15 +200,25 @@ The health and maintainability of the codebase is ensured through a set of
 Rake tasks to test, lint and audit the gem for security vulnerabilities and documentation:
 
 ```
-rake bundle:audit          # Checks for vulnerable versions of gems
-rake qa                    # Test, lint and perform security and documentation audits
-rake rubocop               # Lint the codebase with RuboCop
-rake rubocop:auto_correct  # Auto-correct RuboCop offenses
-rake spec                  # Run RSpec code examples
-rake verify_measurements   # Verify that yardstick coverage is at least 100%
-rake yard                  # Generate YARD Documentation
-rake yard:junk             # Check the junk in your YARD Documentation
-rake yardstick_measure     # Measure docs in lib/**/*.rb with yardstick
+rake build                    # Build nostr.gem into the pkg directory
+rake build:checksum           # Generate SHA512 checksum if nostr.gem into the checksums directory
+rake bundle:audit:check       # Checks the Gemfile.lock for insecure dependencies
+rake bundle:audit:update      # Updates the bundler-audit vulnerability database
+rake clean                    # Remove any temporary products
+rake clobber                  # Remove any generated files
+rake coverage                 # Run spec with coverage
+rake install                  # Build and install nostr.gem into system gems
+rake install:local            # Build and install nostr.gem into system gems without network access
+rake qa                       # Test, lint and perform security and documentation audits
+rake release[remote]          # Create a tag, build and push nostr.gem to rubygems.org
+rake rubocop                  # Run RuboCop
+rake rubocop:autocorrect      # Autocorrect RuboCop offenses (only when it's safe)
+rake rubocop:autocorrect_all  # Autocorrect RuboCop offenses (safe and unsafe)
+rake spec                     # Run RSpec code examples
+rake verify_measurements      # Verify that yardstick coverage is at least 100%
+rake yard                     # Generate YARD Documentation
+rake yard:junk                # Check the junk in your YARD Documentation
+rake yardstick_measure        # Measure docs in lib/**/*.rb with yardstick
 ```
 
 ## Contributing
