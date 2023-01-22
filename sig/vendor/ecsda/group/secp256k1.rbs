@@ -1,0 +1,6 @@
+# Added only to satisfy the Steep requirements. Not 100% reliable.
+module ECDSA
+  class Group
+    Secp256k1: Group
+  end
+end

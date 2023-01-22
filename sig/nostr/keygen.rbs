@@ -1,0 +1,13 @@
+# Classes
+module Nostr
+  class Keygen
+    def initialize: -> void
+    def generate_key_pair: -> KeyPair
+    def generate_private_key: -> String
+    def extract_public_key: (String private_key) -> String
+
+    private
+
+    attr_reader group: untyped
+  end
+end

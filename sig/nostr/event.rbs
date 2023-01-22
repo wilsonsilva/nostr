@@ -1,0 +1,24 @@
+module Nostr
+  class Event < EventFragment
+    attr_reader id: String
+    attr_reader sig: String
+
+    def initialize: (id: String, sig: String,
+      created_at: Integer,
+      kind: Integer,
+      tags: Array[String],
+      content: String,
+    ) -> void
+
+    def to_h: -> {
+      id: String,
+      pubkey: String,
+      created_at: Integer,
+      kind: Integer,
+      tags: Array[String],
+      content: String,
+      sig: String
+    }
+    def ==: (Event other) -> bool
+  end
+end

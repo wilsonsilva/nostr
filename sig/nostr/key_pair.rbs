@@ -1,0 +1,9 @@
+# Classes
+module Nostr
+  class KeyPair
+    attr_reader private_key: String
+    attr_reader public_key: String
+
+    def initialize: (private_key: String, public_key: String) -> void
+  end
+end

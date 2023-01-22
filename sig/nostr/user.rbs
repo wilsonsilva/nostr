@@ -1,0 +1,24 @@
+# Classes
+module Nostr
+  class User
+    attr_reader keypair: KeyPair
+
+    def initialize: (?keypair: KeyPair | nil, ?keygen: Keygen) -> void
+    def create_event: (
+      {
+        id: String,
+        pubkey: String,
+        created_at: Integer,
+        kind: Integer,
+        tags: Array[String],
+        content: String,
+        created_at: Integer,
+        sig: String
+      }
+    ) -> Event
+
+    private
+
+    def sign: (String event_sha256) -> String
+  end
+end

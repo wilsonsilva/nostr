@@ -1,0 +1,69 @@
+# Added only to satisfy the Steep requirements. Not 100% reliable.
+module EventMachine
+  ERRNOS: Hash[untyped, untyped]
+  P: untyped
+  self.@next_tick_mutex: Thread::Mutex
+  self.@reactor_running: bool
+  self.@next_tick_queue: Array[^-> untyped]
+  self.@tails: Array[nil]
+  self.@resultqueue: (Array[untyped] | Thread::Queue)?
+  self.@threadqueue: Thread::Queue?
+  self.@threadpool: Array[untyped]?
+  self.@all_threads_spawned: bool
+  self.@reactor_pid: Integer
+  self.@conns: Hash[untyped, untyped]
+  self.@acceptors: Hash[untyped, Array[(Array[untyped] | Integer)?]]
+  self.@timers: Hash[untyped, Integer | ^-> untyped | false]
+  self.@wrapped_exception: Exception?
+  self.@reactor_thread: Thread?
+  self.@threadpool_size: bot
+  self.@error_handler: bot
+
+  def self.run: (?untyped blk, ?nil tail) ?{ -> untyped } -> nil
+  def self.run_block: -> nil
+  def self.reactor_thread?: -> bool
+  def self.schedule: (*untyped a) -> nil
+  def self.fork_reactor: -> Integer?
+  def self.cleanup_machine: -> Array[untyped]
+  def self.add_shutdown_hook: -> Array[nil]
+  def self.add_timer: (*Integer | ^-> untyped args) ?{ -> untyped } -> nil
+  def self.add_periodic_timer: (*untyped args) -> untyped
+  def self.cancel_timer: (untyped timer_or_sig) -> false?
+  def self.stop_event_loop: -> untyped
+  def self.start_server: (untyped server, ?nil port, ?nil handler, *untyped args) -> untyped
+  def self.attach_server: (untyped sock, ?nil handler, *untyped args) -> untyped
+  def self.stop_server: (untyped signature) -> untyped
+  def self.start_unix_domain_server: (untyped filename, *untyped args) -> untyped
+  def self.connect: (untyped server, ?nil port, ?nil handler, *untyped args) -> untyped
+  def self.bind_connect: (nil bind_addr, nil bind_port, untyped server, ?nil port, ?nil handler, *untyped args) -> untyped
+  def self.watch: (untyped io, ?nil handler, *untyped args) -> untyped
+  def self.attach: (untyped io, ?nil handler, *untyped args) -> untyped
+  def self.attach_io: (untyped io, bool watch_mode, ?nil handler, *untyped args) -> untyped
+  def self.reconnect: (untyped server, untyped port, untyped handler) -> untyped
+  def self.connect_unix_domain: (untyped socketname, *untyped args) -> untyped
+  def self.open_datagram_socket: (untyped address, untyped port, ?nil handler, *untyped args) -> untyped
+  def self.set_quantum: (untyped mills) -> untyped
+  def self.set_max_timers: (untyped ct) -> untyped
+  def self.get_max_timers: -> untyped
+  def self.connection_count: -> untyped
+  def self.run_deferred_callbacks: -> Integer
+  def self.defer: (?nil op, ?nil callback, ?nil errback) -> untyped
+  def self.spawn_threadpool: -> true
+  def self.defers_finished?: -> bool
+  def self.next_tick: (?nil pr) { -> nil } -> nil
+  def self.set_effective_user: (untyped username) -> untyped
+  def self.set_descriptor_table_size: (?nil n_descriptors) -> untyped
+  def self.popen: (untyped cmd, ?nil handler, *untyped args) -> untyped
+  def self.reactor_running?: -> bool
+  def self.open_keyboard: (?nil handler, *untyped args) -> untyped
+  def self.watch_file: (untyped filename, ?nil handler, *untyped args) -> untyped
+  def self.watch_process: (untyped pid, ?nil handler, *untyped args) -> untyped
+  def self.error_handler: (?nil cb) -> nil
+  def self.enable_proxy: (untyped from, untyped to, ?Integer bufsize, ?Integer length) -> untyped
+  def self.disable_proxy: (untyped from) -> untyped
+  def self.heartbeat_interval: -> untyped
+  def self.heartbeat_interval=: (untyped time) -> untyped
+  def self.event_callback: (untyped conn_binding, untyped opcode, untyped data) -> Integer?
+  def self._open_file_for_writing: (untyped filename, ?nil handler) -> untyped
+  def self.klass_from_handler: (?untyped klass, ?Integer? handler, *nil args) -> Integer
+end

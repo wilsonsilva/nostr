@@ -1,0 +1,18 @@
+# Added only to satisfy the Steep requirements. Not 100% reliable.
+module EventMachine
+  class Channel
+    @subs: Hash[untyped, untyped]
+    @uid: Integer
+
+    def initialize: -> void
+    def num_subscribers: -> Integer
+    def subscribe: (*untyped a) ?{ -> untyped } -> Integer
+    def unsubscribe: (untyped name) -> untyped
+    def push: (*untyped items) -> untyped
+    alias << push
+    def pop: (*untyped a) -> untyped
+
+    private
+    def gen_id: -> Integer
+  end
+end

@@ -1,0 +1,9 @@
+# Classes
+module Nostr
+  class Relay
+    attr_reader url: String
+    attr_reader name: String
+
+    def initialize: (url: String, name: String) -> void
+  end
+end

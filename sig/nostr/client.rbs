@@ -1,0 +1,20 @@
+module Nostr
+  class Client
+    include EventEmitter
+
+    def initialize: -> void
+    def connect: (Relay relay) -> Thread
+    def subscribe: (?subscription_id: String, ?filter: Filter) -> Subscription
+    def unsubscribe: (String subscription_id) -> untyped
+    def publish: (Event event) -> untyped
+
+    private
+
+    attr_reader subscriptions: Hash[String, Subscription]
+    attr_reader parent_to_child_channel: untyped
+    attr_reader child_to_parent_channel: untyped
+
+    def execute_within_an_em_thread: { -> untyped } -> Thread
+    def initialize_channels: -> untyped
+  end
+end

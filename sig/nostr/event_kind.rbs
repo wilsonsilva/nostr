@@ -1,0 +1,8 @@
+module Nostr
+  module EventKind
+    SET_METADATA: Integer
+    TEXT_NOTE: Integer
+    RECOMMEND_SERVER: Integer
+    CONTACTS: Integer
+  end
+end

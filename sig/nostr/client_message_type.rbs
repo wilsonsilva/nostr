@@ -1,0 +1,7 @@
+module Nostr
+  module ClientMessageType
+    EVENT: String
+    REQ: String
+    CLOSE: String
+  end
+end

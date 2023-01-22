@@ -27,7 +27,6 @@ All examples below assume that the gem has been required.
 require 'nostr'
 ```
 
-
 ### Generating a keypair
 
 ```ruby
@@ -220,6 +219,13 @@ rake yard                     # Generate YARD Documentation
 rake yard:junk                # Check the junk in your YARD Documentation
 rake yardstick_measure        # Measure docs in lib/**/*.rb with yardstick
 ```
+
+### Type checking
+
+This gem leverages [RBS](https://github.com/ruby/rbs), a language to describe the structure of Ruby programs. It is
+used to provide type checking and autocompletion in your editor. Run `bundle exec typeprof FILENAME` to generate
+an RBS definition for the given Ruby file. And validate all definitions using [Steep](https://github.com/soutaro/steep)
+with the command `bundle exec steep check`.
 
 ## Contributing
 

@@ -1,0 +1,12 @@
+module Nostr
+  class EventFragment
+    attr_reader pubkey: String
+    attr_reader created_at: Integer
+    attr_reader kind: Integer
+    attr_reader tags: Array[String]
+    attr_reader content: String
+
+    def initialize: (pubkey: String, kind: Integer, content: String, ?created_at: Integer, ?tags: Array[String]) -> void
+    def serialize: -> [Integer, String, Integer, Integer, Array[String], String]
+  end
+end

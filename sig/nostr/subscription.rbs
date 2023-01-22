@@ -1,0 +1,9 @@
+module Nostr
+  class Subscription
+    attr_reader id: String
+    attr_reader filter: Filter
+
+    def initialize: (filter: Filter, ?id: String) -> void
+    def ==: (Subscription other) -> bool
+  end
+end

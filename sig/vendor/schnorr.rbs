@@ -1,0 +1,4 @@
+# Added only to satisfy the Steep requirements. Not 100% reliable.
+module Schnorr
+  def self.sign: (String message, String private_key, ?String aux_rand) -> untyped
+end
