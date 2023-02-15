@@ -54,7 +54,7 @@ You may instantiate multiple Clients and multiple Relays.
 
 ```ruby
 client = Nostr::Client.new
-relay = Nostr::Relay.new(url: 'wss://relay.damus.io', name: 'Damus')
+relay  = Nostr::Relay.new(url: 'wss://relay.damus.io', name: 'Damus')
 
 client.connect(relay)
 ```
