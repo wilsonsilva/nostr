@@ -81,14 +81,28 @@ end
 # > Network error: wss://rsslay.fiatjaf.com: Unable to verify the server certificate for 'rsslay.fiatjaf.com'
 ```
 
-The `:message` event is fired whenwhen data is received through a WebSocket.
+The `:message` event is fired when data is received through a WebSocket.
 
 ```ruby
 client.on :message do |message|
   puts message
 end
 
-# > Network error: wss://rsslay.fiatjaf.com: Unable to verify the server certificate for 'rsslay.fiatjaf.com'
+# [
+#   "EVENT",
+#   "d34107357089bfc9882146d3bfab0386",
+#   {
+#     "content":"",
+#     "created_at":1676456512,
+#     "id":"18f63550da74454c5df7caa2a349edc5b2a6175ea4c5367fa4b4212781e5b310",
+#     "kind":3,
+#     "pubkey":"117a121fa41dc2caa0b3d6c5b9f42f90d114f1301d39f9ee96b646ebfee75e36",
+#     "sig":"d171420bd62cf981e8f86f2dd8f8f86737ea2bbe2d98da88db092991d125535860d982139a3c4be39886188613a9912ef380be017686a0a8b74231dc6e0b03cb",
+#     "tags":[
+#       ["p","1cc821cc2d47191b15fcfc0f73afed39a86ac6fb34fbfa7993ee3e0f0186ef7c"]
+#     ]
+#   }
+# ]
 ```
 
 The `:close` event is fired when a connection with a WebSocket is closed.
