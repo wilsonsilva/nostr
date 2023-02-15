@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 
 - Client compliance wth [NIP-02](https://github.com/nostr-protocol/nips/blob/master/02.md) (manage contact lists)
+- RBS type checking using Steep and TypeProf
+
+## Fixed
+
+- Fixed a documentation typo
+- Fixed a documentation error regarding the receiving of messages via websockets
 
 ## [0.2.0] - 2023-01-12
 
