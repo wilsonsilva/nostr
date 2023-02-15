@@ -7,6 +7,26 @@
 Asynchronous Nostr client. Please note that the API is likely to change as the gem is still in development and
 has not yet reached a stable release. Use with caution.
 
+## Table of contents
+
+- [Installation](#installation)
+- [Usage](#usage)
+  * [Requiring the gem](#requiring-the-gem)
+  * [Generating a keypair](#generating-a-keypair)
+  * [Generating a private key and a public key](#generating-a-private-key-and-a-public-key)
+  * [Connecting to a Relay](#connecting-to-a-relay)
+  * [WebSocket events](#websocket-events)
+  * [Requesting for events / creating a subscription](#requesting-for-events--creating-a-subscription)
+  * [Stop previous subscriptions](#stop-previous-subscriptions)
+  * [Publishing an event](#publishing-an-event)
+  * [Creating/updating your contact list](#creatingupdating-your-contact-list)
+- [Implemented NIPs](#implemented-nips)
+- [Development](#development)
+  * [Type checking](#type-checking)
+- [Contributing](#contributing)
+- [License](#license)
+- [Code of Conduct](#code-of-conduct)
+
 ## Installation
 
 Install the gem and add to the application's Gemfile by executing:
@@ -220,7 +240,7 @@ update_contacts_event = user.create_event(
 client.publish(update_contacts_event)
 ```
 
-## NIPS
+## Implemented NIPs
 
 - [x] [NIP-01 - Client](https://github.com/nostr-protocol/nips/blob/master/01.md)
 - [x] [NIP-02 - Client](https://github.com/nostr-protocol/nips/blob/master/02.md)
