@@ -25,7 +25,7 @@ module Nostr
     #
     attr_reader :created_at
 
-    # The kind of the event. An integer from 0 to 2
+    # The kind of the event. An integer from 0 to 3
     #
     # @api public
     #
@@ -76,7 +76,7 @@ module Nostr
     #
     # @param pubkey [String] 32-bytes hex-encoded public key of the event creator.
     # @param created_at [Integer] Date of the creation of the vent. A UNIX timestamp, in seconds.
-    # @param kind [Integer] The kind of the event. An integer from 0 to 2.
+    # @param kind [Integer] The kind of the event. An integer from 0 to 3.
     # @param tags [Array<Array>] An array of tags. Each tag is an array of strings.
     # @param content [String] Arbitrary string.
     #

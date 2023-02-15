@@ -3,6 +3,6 @@ module Nostr
     SET_METADATA: Integer
     TEXT_NOTE: Integer
     RECOMMEND_SERVER: Integer
-    CONTACTS: Integer
+    CONTACT_LIST: Integer
   end
 end

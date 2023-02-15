@@ -24,5 +24,12 @@ module Nostr
     # @return [Integer]
     #
     RECOMMEND_SERVER = 2
+
+    # A special event with kind 3, meaning "contact list" is defined as having a list of p tags, one for each of
+    # the followed/known profiles one is following.
+    #
+    # @return [Integer]
+    #
+    CONTACT_LIST = 3
   end
 end

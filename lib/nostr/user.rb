@@ -50,7 +50,7 @@ module Nostr
     # @param event_attributes [Hash]
     # @option event_attributes [String] :pubkey 32-bytes hex-encoded public key of the event creator.
     # @option event_attributes [Integer] :created_at Date of the creation of the vent. A UNIX timestamp, in seconds.
-    # @option event_attributes [Integer] :kind The kind of the event. An integer from 0 to 2.
+    # @option event_attributes [Integer] :kind The kind of the event. An integer from 0 to 3.
     # @option event_attributes [Array<Array>] :tags  An array of tags. Each tag is an array of strings.
     # @option event_attributes [String] :content Arbitrary string.
     #
