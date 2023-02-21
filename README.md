@@ -51,7 +51,7 @@ require 'nostr'
 
 ```ruby
 keygen  = Nostr::Keygen.new
-keypair = keygen.generate_keypair
+keypair = keygen.generate_key_pair
 
 keypair.private_key
 keypair.public_key
