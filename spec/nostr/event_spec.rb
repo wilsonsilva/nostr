@@ -97,6 +97,54 @@ RSpec.describe Nostr::Event do
     end
   end
 
+  describe '#add_event_reference' do
+    let(:event) do
+      described_class.new(
+        pubkey: 'ccf9fdf3e1466d7c20969c71ec98defcf5f54aee088513e1b73ccb7bd770d460',
+        kind: Nostr::EventKind::TEXT_NOTE,
+        tags: [
+          %w[p 472f440f29ef996e92a186b8d320ff180c855903882e59d50de1b8bd5669301e]
+        ],
+        content: 'Your feedback is appreciated, now pay $8'
+      )
+    end
+
+    it 'appends a reference to an event to the event tags' do
+      event.add_event_reference('189df012cfff8a075785b884bd702025f4a7a37710f581c4ac9d33e24b585408')
+
+      expect(event.tags).to eq(
+        [
+          %w[p 472f440f29ef996e92a186b8d320ff180c855903882e59d50de1b8bd5669301e],
+          %w[e 189df012cfff8a075785b884bd702025f4a7a37710f581c4ac9d33e24b585408]
+        ]
+      )
+    end
+  end
+
+  describe '#add_pubkey_reference' do
+    let(:event) do
+      described_class.new(
+        pubkey: 'ccf9fdf3e1466d7c20969c71ec98defcf5f54aee088513e1b73ccb7bd770d460',
+        kind: Nostr::EventKind::TEXT_NOTE,
+        tags: [
+          %w[e 189df012cfff8a075785b884bd702025f4a7a37710f581c4ac9d33e24b585408]
+        ],
+        content: 'Your feedback is appreciated, now pay $8'
+      )
+    end
+
+    it 'appends a reference to a pubkey to the event tags' do
+      event.add_pubkey_reference('472f440f29ef996e92a186b8d320ff180c855903882e59d50de1b8bd5669301e')
+
+      expect(event.tags).to eq(
+        [
+          %w[e 189df012cfff8a075785b884bd702025f4a7a37710f581c4ac9d33e24b585408],
+          %w[p 472f440f29ef996e92a186b8d320ff180c855903882e59d50de1b8bd5669301e]
+        ]
+      )
+    end
+  end
+
   describe '#content' do
     it 'exposes the event content' do
       expect(event.content).to eq('Your feedback is appreciated, now pay $8')

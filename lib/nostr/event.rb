@@ -138,6 +138,34 @@ module Nostr
       @content = content
     end
 
+    # Adds a reference to an event id as an 'e' tag
+    #
+    # @api public
+    #
+    # @example Adding a reference to a pubkey
+    #   event_id = '189df012cfff8a075785b884bd702025f4a7a37710f581c4ac9d33e24b585408'
+    #   event.add_event_reference(event_id)
+    #
+    # @param event_id [String] 32-bytes hex-encoded event id.
+    #
+    # @return [Array<String>] The event's updated list of tags
+    #
+    def add_event_reference(event_id) = tags.push(['e', event_id])
+
+    # Adds a reference to a pubkey as a 'p' tag
+    #
+    # @api public
+    #
+    # @example Adding a reference to a pubkey
+    #   pubkey = '48df4af6e240ac5f7c5de89bf5941b249880be0e87d03685b178ccb1a315f52e'
+    #   event.add_pubkey_reference(pubkey)
+    #
+    # @param pubkey [String] 32-bytes hex-encoded public key.
+    #
+    # @return [Array<String>] The event's updated list of tags
+    #
+    def add_pubkey_reference(pubkey) = tags.push(['p', pubkey])
+
     # Signs an event with the user's private key
     #
     # @api public
