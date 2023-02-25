@@ -6,14 +6,12 @@ module Nostr
     def initialize: (?keypair: KeyPair | nil, ?keygen: Keygen) -> void
     def create_event: (
       {
-        id: String,
         pubkey: String,
         created_at: Integer,
         kind: Integer,
         tags: Array[String],
         content: String,
         created_at: Integer,
-        sig: String
       }
     ) -> Event
 
