@@ -272,6 +272,7 @@ client.publish(encrypted_direct_message)
 
 - [x] [NIP-01 - Client](https://github.com/nostr-protocol/nips/blob/master/01.md)
 - [x] [NIP-02 - Client](https://github.com/nostr-protocol/nips/blob/master/02.md)
+- [x] [NIP-04 - Client](https://github.com/nostr-protocol/nips/blob/master/04.md)
 
 ## Development
 
