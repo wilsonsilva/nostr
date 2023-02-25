@@ -4,5 +4,6 @@ module Nostr
     TEXT_NOTE: Integer
     RECOMMEND_SERVER: Integer
     CONTACT_LIST: Integer
+    ENCRYPTED_DIRECT_MESSAGE: Integer
   end
 end

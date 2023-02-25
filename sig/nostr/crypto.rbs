@@ -1,9 +1,16 @@
 module Nostr
   class Crypto
+    BN_BASE: Integer
+    CIPHER_CURVE: String
+    CIPHER_ALGORITHM: String
+
+    def encrypt_text: (String, String, String) -> String
+    def decrypt_text: (String, String, String) -> String
     def sign_event: (Event, String) -> Event
 
     private
 
+    def compute_shared_key: (String, String) -> String
     def hash_event:(Event) -> String
   end
 end

@@ -6,7 +6,9 @@ target :lib do
   check 'lib'
 
   # Core libraries
+  library 'base64'
   library 'digest'
+  library 'openssl'
   library 'securerandom'
 
   # Gems

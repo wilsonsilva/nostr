@@ -10,6 +10,7 @@ require_relative 'nostr/relay'
 require_relative 'nostr/key_pair'
 require_relative 'nostr/event_kind'
 require_relative 'nostr/event'
+require_relative 'nostr/events/encrypted_direct_message'
 require_relative 'nostr/client'
 require_relative 'nostr/user'
 

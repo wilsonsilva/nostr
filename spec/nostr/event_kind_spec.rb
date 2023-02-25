@@ -26,4 +26,10 @@ RSpec.describe Nostr::EventKind do
       expect(described_class::CONTACT_LIST).to eq(3)
     end
   end
+
+  describe '::ENCRYPTED_DIRECT_MESSAGE' do
+    it 'is an integer' do
+      expect(described_class::ENCRYPTED_DIRECT_MESSAGE).to eq(4)
+    end
+  end
 end
