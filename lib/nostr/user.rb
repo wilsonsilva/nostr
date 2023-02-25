@@ -57,36 +57,8 @@ module Nostr
     # @return [Event]
     #
     def create_event(event_attributes)
-      event_fragment = EventFragment.new(**event_attributes.merge(pubkey: keypair.public_key))
-      event_sha256 = Digest::SHA256.hexdigest(JSON.dump(event_fragment.serialize))
-
-      signature = sign(event_sha256)
-
-      Event.new(
-        id: event_sha256,
-        pubkey: event_fragment.pubkey,
-        created_at: event_fragment.created_at,
-        kind: event_fragment.kind,
-        tags: event_fragment.tags,
-        content: event_fragment.content,
-        sig: signature
-      )
-    end
-
-    private
-
-    # Signs an event with the user's private key
-    #
-    # @api private
-    #
-    # @param event_sha256 [String] The SHA256 hash of the event.
-    #
-    # @return [String] The signature of the event.
-    #
-    def sign(event_sha256)
-      hex_private_key = Array(keypair.private_key).pack('H*')
-      hex_message = Array(event_sha256).pack('H*')
-      Schnorr.sign(hex_message, hex_private_key).encode.unpack1('H*')
+      event = Event.new(**event_attributes.merge(pubkey: keypair.public_key))
+      event.sign(keypair.private_key)
     end
   end
 end

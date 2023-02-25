@@ -1,0 +1,9 @@
+module Nostr
+  class Crypto
+    def sign_event: (Event, String) -> Event
+
+    private
+
+    def hash_event:(Event) -> String
+  end
+end

@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require_relative 'nostr/crypto'
 require_relative 'nostr/version'
 require_relative 'nostr/keygen'
 require_relative 'nostr/client_message_type'

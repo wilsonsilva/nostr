@@ -5,8 +5,8 @@ module Nostr
     attr_reader kind: Integer
     attr_reader tags: Array[String]
     attr_reader content: String
-    attr_reader id: String?|nil
-    attr_reader sig: String?|nil
+    attr_accessor id: String?|nil
+    attr_accessor sig: String?|nil
 
     def initialize: (pubkey: String, kind: Integer, content: String, ?created_at: Integer, ?tags: Array[String], ?id: String|nil, ?sig: String|nil) -> void
     def serialize: -> [Integer, String, Integer, Integer, Array[String], String]
@@ -21,5 +21,7 @@ module Nostr
       sig: String?|nil
     }
     def ==: (Event other) -> bool
+
+    def sign:(String) -> Event
   end
 end

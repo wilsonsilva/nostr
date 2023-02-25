@@ -70,9 +70,13 @@ module Nostr
     # @example Getting the event id
     #   event.id # => 'ccf9fdf3e1466d7c20969c71ec98defcf5f54aee088513e1b73ccb7bd770d460'
     #
+    # @example Setting the event id
+    #   event.id = 'ccf9fdf3e1466d7c20969c71ec98defcf5f54aee088513e1b73ccb7bd770d460'
+    #   event.id # => 'ccf9fdf3e1466d7c20969c71ec98defcf5f54aee088513e1b73ccb7bd770d460'
+    #
     # @return [String|nil]
     #
-    attr_reader :id
+    attr_accessor :id
 
     # 64-bytes signature of the sha256 hash of the serialized event data, which is
     # the same as the "id" field
@@ -82,9 +86,13 @@ module Nostr
     # @example Getting the event signature
     #   event.sig # => ''
     #
+    # @example Setting the event signature
+    #   event.sig = '058613f8d34c053294cc28b7f9e1f8f0e80fd1ac94fb20f2da6ca514e7360b39'
+    #   event.sig # => '058613f8d34c053294cc28b7f9e1f8f0e80fd1ac94fb20f2da6ca514e7360b39'
+    #
     # @return [String|nil]
     #
-    attr_reader :sig
+    attr_accessor :sig
 
     # Instantiates a new Event
     #
@@ -128,6 +136,22 @@ module Nostr
       @kind = kind
       @tags = tags
       @content = content
+    end
+
+    # Signs an event with the user's private key
+    #
+    # @api public
+    #
+    # @example Signing an event
+    #   event.sign(private_key)
+    #
+    # @param private_key [String] 32-bytes hex-encoded private key.
+    #
+    # @return [Event] A signed event.
+    #
+    def sign(private_key)
+      crypto = Crypto.new
+      crypto.sign_event(self, private_key)
     end
 
     # Serializes the event, to obtain a SHA256 digest of it
