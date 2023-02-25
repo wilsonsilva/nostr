@@ -20,4 +20,10 @@ RSpec.describe Nostr::EventKind do
       expect(described_class::RECOMMEND_SERVER).to eq(2)
     end
   end
+
+  describe '::CONTACT_LIST' do
+    it 'is an integer' do
+      expect(described_class::CONTACT_LIST).to eq(3)
+    end
+  end
 end
