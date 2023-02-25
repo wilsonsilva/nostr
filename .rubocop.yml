@@ -31,6 +31,9 @@ Metrics/BlockLength:
     - '**/*_spec.rb'
     - nostr.gemspec
 
+Metrics/ParameterLists:
+  CountKeywordArgs: false
+
 # ----------------------- RSpec -----------------------
 
 RSpec/ExampleLength:

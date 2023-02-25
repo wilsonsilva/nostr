@@ -1,23 +1,24 @@
 module Nostr
-  class Event < EventFragment
-    attr_reader id: String
-    attr_reader sig: String
+  class Event
+    attr_reader pubkey: String
+    attr_reader created_at: Integer
+    attr_reader kind: Integer
+    attr_reader tags: Array[String]
+    attr_reader content: String
+    attr_reader id: String?|nil
+    attr_reader sig: String?|nil
 
-    def initialize: (id: String, sig: String,
-      created_at: Integer,
-      kind: Integer,
-      tags: Array[String],
-      content: String,
-    ) -> void
+    def initialize: (pubkey: String, kind: Integer, content: String, ?created_at: Integer, ?tags: Array[String], ?id: String|nil, ?sig: String|nil) -> void
+    def serialize: -> [Integer, String, Integer, Integer, Array[String], String]
 
     def to_h: -> {
-      id: String,
+      id: String?|nil,
       pubkey: String,
       created_at: Integer,
       kind: Integer,
       tags: Array[String],
       content: String,
-      sig: String
+      sig: String?|nil
     }
     def ==: (Event other) -> bool
   end
