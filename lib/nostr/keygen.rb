@@ -62,7 +62,7 @@ module Nostr
     # @return [String] A 32-bytes hex-encoded public key.
     #
     def extract_public_key(private_key)
-      group.generator.multiply_by_scalar(private_key.to_i(16)).x.to_s(16)
+      group.generator.multiply_by_scalar(private_key.to_i(16)).x.to_s(16).rjust(64, '0')
     end
 
     private
