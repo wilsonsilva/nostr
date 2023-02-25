@@ -49,6 +49,7 @@ principles of immutability and was a major source of internal complexity as I ne
 
 - Initial release
 
+[0.4.0]: https://github.com/wilsonsilva/nostr/compare/v0.3.0...v0.4.0
 [0.3.0]: https://github.com/wilsonsilva/nostr/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/wilsonsilva/nostr/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/wilsonsilva/nostr/compare/7fded5...v0.1.0
