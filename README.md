@@ -197,9 +197,14 @@ client.unsubscribe('your_subscription_id')
 To publish an event you need a keypair.
 
 ```ruby
-# Set up the private key
-private_key = 'a630b06e2f883378d0aa335b9adaf7734603e00433350b684fe53e184f08c58f'
-user = Nostr::User.new(private_key)
+# Create a keypair
+keypair = Nostr::KeyPair.new(
+  private_key: '893c4cc8088924796b41dc788f7e2f746734497010b1a9f005c1faad7074b900',
+  public_key: '2d7661527d573cc8e84f665fa971dd969ba51e2526df00c149ff8e40a58f9558',
+)
+
+# Add the keypair to the user facade
+user = Nostr::User.new(keypair: keypair)
 
 # Create a signed event
 event = user.create_event(
