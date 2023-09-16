@@ -47,7 +47,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'guard-rubocop', '~> 1.5'
   spec.add_development_dependency 'overcommit', '~> 0.59'
   spec.add_development_dependency 'pry', '~> 0.14'
-  spec.add_development_dependency 'puma', '~> 5.6'
+  spec.add_development_dependency 'puma', '~> 6.3'
   spec.add_development_dependency 'rack', '~> 3.0'
   spec.add_development_dependency 'rake', '~> 13.0'
   spec.add_development_dependency 'rbs', '~> 2.8'
