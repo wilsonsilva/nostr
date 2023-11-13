@@ -4,7 +4,7 @@ VitePress-powered documentation for the Nostr Ruby gem.
 
 ## Live Demo
 
-https://nostr-omega.vercel.app/
+https://nostr-ruby.com/
 
 ## Development
 

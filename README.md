@@ -40,7 +40,7 @@ If bundler is not being used to manage dependencies, install the gem by executin
 ## ⚡️ Quickstart
 
 Here is a quick example of how to use the gem. For more detailed documentation, please check the
-[documentation website](https://nostr-omega.vercel.app).
+[documentation website](https://nostr-ruby.com).
 
 ```ruby
 # Require the gem
@@ -117,7 +117,7 @@ end
 
 I made a detailed documentation for this gem and it's usage. The code is also fully documented using YARD.
 
-- [Guide documentation](https://nostr-omega.vercel.app)
+- [Guide documentation](https://nostr-ruby.com)
 - [YARD documentation](https://rubydoc.info/gems/nostr)
 
 ## ✅ Implemented NIPs
