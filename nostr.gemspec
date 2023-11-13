@@ -31,7 +31,7 @@ Gem::Specification.new do |spec|
   spec.executables = spec.files.grep(%r{\Aexe/}) { |f| File.basename(f) }
   spec.require_paths = ['lib']
 
-  spec.add_dependency 'bech32', '~> 1.3'
+  spec.add_dependency 'bech32', '~> 1.4'
   spec.add_dependency 'bip-schnorr', '~> 0.4'
   spec.add_dependency 'ecdsa', '~> 1.2'
   spec.add_dependency 'event_emitter', '~> 0.2'
