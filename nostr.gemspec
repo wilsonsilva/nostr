@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
 
   spec.summary = 'Client and relay implementation of the Nostr protocol.'
   spec.description = 'Client and relay implementation of the Nostr protocol.'
-  spec.homepage = 'https://github.com/wilsonsilva/nostr'
+  spec.homepage = 'https://nostr-ruby.com/'
   spec.license = 'MIT'
   spec.required_ruby_version = '>= 3.2.0'
   spec.metadata['rubygems_mfa_required'] = 'true'
