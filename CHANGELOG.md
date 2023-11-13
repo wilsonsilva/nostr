@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Changed
 
-- Set the gem's homepage to `https://nostr-ruby.com/`
+- Set the gem's homepage to [`https://nostr-ruby.com/`](https://nostr-ruby.com/)
 
 ## [0.4.0] - 2023-02-25
 
