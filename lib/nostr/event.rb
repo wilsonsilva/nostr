@@ -128,7 +128,6 @@ module Nostr
       id: nil,
       sig: nil
     )
-
       @id = id
       @sig = sig
       @pubkey = pubkey
