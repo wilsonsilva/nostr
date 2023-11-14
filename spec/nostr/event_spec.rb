@@ -248,6 +248,40 @@ RSpec.describe Nostr::Event do
     end
   end
 
+  describe '#signed?' do
+    context 'when the event has a signature' do
+      let(:event) do
+        described_class.new(
+          id: '20f31a9b2a0ced48a167add9732ccade1dca5e34b44316e37da4af33bc8946a9',
+          pubkey: 'ccf9fdf3e1466d7c20969c71ec98defcf5f54aee088513e1b73ccb7bd770d460',
+          created_at: 1_230_981_305,
+          kind: 1,
+          tags: [],
+          content: 'Your feedback is appreciated, now pay $8',
+          sig: '058613f8d34c053294cc28b7f9e1f8f0e80fd1ac94fb20f2da6ca514e7360b39' \
+            '63d0086171f842ffebf1f7790ce147b4811a15ef3f59c76ec1324b970cc57ffe'
+        )
+      end
+
+      specify { expect(event).to be_signed }
+    end
+
+    context 'when the event does not have a signature' do
+      let(:event) do
+        described_class.new(
+          id: '20f31a9b2a0ced48a167add9732ccade1dca5e34b44316e37da4af33bc8946a9',
+          pubkey: 'ccf9fdf3e1466d7c20969c71ec98defcf5f54aee088513e1b73ccb7bd770d460',
+          created_at: 1_230_981_305,
+          kind: 1,
+          tags: [],
+          content: 'Your feedback is appreciated, now pay $8',
+        )
+      end
+
+      specify { expect(event).not_to be_signed }
+    end
+  end
+
   describe '#tags' do
     it 'exposes the event tags' do
       expect(event.tags).to eq(

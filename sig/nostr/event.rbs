@@ -20,6 +20,8 @@ module Nostr
 
     def serialize: -> [Integer, String, Integer, Integer, Array[Array[String]], String]
 
+    def signed?: -> bool
+
     def to_h: -> {
       id: String?|nil,
       pubkey: String,

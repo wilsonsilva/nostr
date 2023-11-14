@@ -182,6 +182,19 @@ module Nostr
       crypto.sign_event(self, private_key)
     end
 
+    # Whether the event is signed or not
+    #
+    # @api public
+    #
+    # @example
+    #   event.signed? # => true
+    #
+    # @return [Boolean] +true+ if the event is signed and +false+ otherwise
+    #
+    def signed?
+      !sig.nil?
+    end
+
     # Serializes the event, to obtain a SHA256 digest of it
     #
     # @api public
