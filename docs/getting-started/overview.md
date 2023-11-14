@@ -138,7 +138,7 @@ client.on :connect do
   )
 
   # Subscribe to events matching conditions of a filter
-  subscription = client.subscribe(filter)
+  subscription = client.subscribe(filter: filter)
 
   # Unsubscribe from events matching the filter above
   client.unsubscribe(subscription.id)
