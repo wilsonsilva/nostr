@@ -1,0 +1,17 @@
+type tag_marker = 'reply' | 'root' | 'mention'
+
+module Nostr
+  module Tags
+    class E
+      NAME: String
+
+      def initialize: (event_id: String, ?relay_url: String, ?marker: tag_marker?) -> void
+      def to_a: () -> Array[String]
+      def to_json: (*untyped) -> String
+
+      attr_reader event_id: String
+      attr_reader relay_url: String
+      attr_reader marker: tag_marker?
+    end
+  end
+end

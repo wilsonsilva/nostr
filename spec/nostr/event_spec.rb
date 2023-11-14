@@ -109,15 +109,47 @@ RSpec.describe Nostr::Event do
       )
     end
 
-    it 'appends a reference to an event to the event tags' do
-      event.add_event_reference('189df012cfff8a075785b884bd702025f4a7a37710f581c4ac9d33e24b585408')
+    context 'when the event_id is missing' do
 
-      expect(event.tags).to eq(
-        [
-          %w[p 472f440f29ef996e92a186b8d320ff180c855903882e59d50de1b8bd5669301e],
-          %w[e 189df012cfff8a075785b884bd702025f4a7a37710f581c4ac9d33e24b585408]
-        ]
-      )
+    end
+
+    context 'when the relay_url is missing' do
+      it 'appends a reference to an event to the event tags' do
+        event.add_event_reference('189df012cfff8a075785b884bd702025f4a7a37710f581c4ac9d33e24b585408')
+
+        expect(event.tags).to eq(
+          [
+            %w[p 472f440f29ef996e92a186b8d320ff180c855903882e59d50de1b8bd5669301e],
+            %w[e 189df012cfff8a075785b884bd702025f4a7a37710f581c4ac9d33e24b585408]
+          ]
+        )
+      end
+    end
+
+    context 'when the marker is missing' do
+      it 'appends a reference to an event to the event tags' do
+        event.add_event_reference('189df012cfff8a075785b884bd702025f4a7a37710f581c4ac9d33e24b585408')
+
+        expect(event.tags).to eq(
+          [
+            %w[p 472f440f29ef996e92a186b8d320ff180c855903882e59d50de1b8bd5669301e],
+            %w[e 189df012cfff8a075785b884bd702025f4a7a37710f581c4ac9d33e24b585408]
+          ]
+        )
+      end
+    end
+
+    context 'when the event_id, relay_url and marker are present' do
+      it 'appends a reference to an event to the event tags' do
+        event.add_event_reference('189df012cfff8a075785b884bd702025f4a7a37710f581c4ac9d33e24b585408')
+
+        expect(event.tags).to eq(
+          [
+            %w[p 472f440f29ef996e92a186b8d320ff180c855903882e59d50de1b8bd5669301e],
+            %w[e 189df012cfff8a075785b884bd702025f4a7a37710f581c4ac9d33e24b585408]
+          ]
+        )
+      end
     end
   end
 

@@ -33,7 +33,7 @@ module Nostr
 
     def sign:(String) -> Event
 
-    def add_event_reference: (String) -> Array[Array[String]]
+    def add_event_reference: (String, String?, String?) -> Array[Array[String]]
     def add_pubkey_reference: (String) -> Array[Array[String]]
   end
 end
