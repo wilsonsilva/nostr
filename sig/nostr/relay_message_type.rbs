@@ -1,0 +1,8 @@
+module Nostr
+  module RelayMessageType
+    EOSE: String
+    EVENT: String
+    NOTICE: String
+    OK: String
+  end
+end

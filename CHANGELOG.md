@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Added
+
+- Added relay message type enums `Nostr::RelayMessageType`
+
 ### Changed
 
 - Set the gem's homepage to [`https://nostr-ruby.com/`](https://nostr-ruby.com/)
