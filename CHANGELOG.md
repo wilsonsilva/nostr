@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 - Set the gem's homepage to [`https://nostr-ruby.com/`](https://nostr-ruby.com/)
 - Updated the filter's documentation to reflect the removal of prefix matching
+- Updated the subscription's id documentation to reflect the changes in the protocol definition
 
 ## [0.4.0] - 2023-02-25
 

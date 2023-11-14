@@ -5,7 +5,7 @@ require 'securerandom'
 module Nostr
   # A subscription the result of a request to receive events from a relay
   class Subscription
-    # A random string that should be used to represent a subscription
+    # An arbitrary, non-empty string of max length 64 chars used to represent a subscription
     #
     # @api public
     #
@@ -41,7 +41,7 @@ module Nostr
     # @example Subscribing to all events created after a certain time
     #   subscription = Nostr::Subscription.new(filter: Nostr::Filter.new(since: 1230981305))
     #
-    # @param id [String] A random string that should be used to represent a subscription
+    # @param id [String] An arbitrary, non-empty string of max length 64 chars used to represent a subscription
     # @param filter [Filter] An object that determines what events will be sent in that subscription
     #
     def initialize(filter:, id: SecureRandom.hex)

@@ -74,7 +74,8 @@ module Nostr
     # @example Subscribing to all events created after a certain time
     #   subscription = client.subscribe(filter: Nostr::Filter.new(since: 1230981305))
     #
-    # @param subscription_id [String] The subscription id. A random string.
+    # @param subscription_id [String] The subscription id. An arbitrary, non-empty string of max length 64
+    #   chars used to represent a subscription.
     # @param filter [Filter] A set of attributes that represent the events that the client is interested in.
     #
     # @return [Subscription] The subscription object
