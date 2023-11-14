@@ -122,9 +122,9 @@ I made a detailed documentation for this gem and it's usage. The code is also fu
 
 ## ✅ Implemented NIPs
 
-- [x] [NIP-01 - Client](https://github.com/nostr-protocol/nips/blob/master/01.md)
-- [x] [NIP-02 - Client](https://github.com/nostr-protocol/nips/blob/master/02.md)
-- [x] [NIP-04 - Client](https://github.com/nostr-protocol/nips/blob/master/04.md)
+- [x] [NIP-01 - Basic protocol flow description](https://github.com/nostr-protocol/nips/blob/master/01.md)
+- [x] [NIP-02 - Contact List and Petnames](https://github.com/nostr-protocol/nips/blob/master/02.md)
+- [x] [NIP-04 - Encrypted Direct Message](https://github.com/nostr-protocol/nips/blob/master/04.md)
 
 ## 🔨 Development
 
