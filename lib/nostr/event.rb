@@ -150,7 +150,9 @@ module Nostr
     #
     # @return [Array<String>] The event's updated list of tags
     #
-    def add_event_reference(event_id) = tags.push(['e', event_id])
+    def add_event_reference(event_id, relay_url = '', marker = nil)
+      tags.push(['e', event_id, relay_url, marker].compact)
+    end
 
     # Adds a reference to a pubkey as a 'p' tag
     #
