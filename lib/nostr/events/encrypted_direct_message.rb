@@ -43,7 +43,7 @@ module Nostr
           pubkey: sender_public_key,
           kind: Nostr::EventKind::ENCRYPTED_DIRECT_MESSAGE,
           content: encrypted_content,
-          )
+        )
 
         add_pubkey_reference(recipient_public_key)
         add_event_reference(previous_direct_message) if previous_direct_message
