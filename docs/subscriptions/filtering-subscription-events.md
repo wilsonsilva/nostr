@@ -2,7 +2,7 @@
 
 ## Filtering by id
 
-You can filter events by their ids or prefixes:
+You can filter events by their ids:
 
 ```ruby
 filter = Nostr::Filter.new(
@@ -10,10 +10,6 @@ filter = Nostr::Filter.new(
     # matches events with these exact IDs
     '8535d5e2d7b9dc07567f676fbe70428133c9884857e1915f5b1cc6514c2fdff8',
     '461544014d87c9eaf3e76e021240007dff2c7afb356319f99c741b45749bf82f',
-    # and match events whose id start with '76fbe'
-    '76fbe',
-    # and match events whose id start with 'b'
-    'b',
   ]
 )
 subscription = client.subscribe(filter: filter)
@@ -21,7 +17,7 @@ subscription = client.subscribe(filter: filter)
 
 ## Filtering by author
 
-You can filter events by their author's pubkey or prefix:
+You can filter events by their author's pubkey:
 
 ```ruby
 filter = Nostr::Filter.new(
@@ -29,10 +25,6 @@ filter = Nostr::Filter.new(
     # matches events whose (authors) pubkey match these exact IDs
     'b698043170d580f8ae5bad4ac80b1fdb508e957f0bbffe97f2a8915fa8b34070',
     '51f853ff4894b062950e46ebed8c1c7015160f8173994414a96dd286f65f0f49',
-    # and match events whose (authors) pubkey start with 'db508e957'
-    'db508e957',
-    # and match events whose (authors) pubkey start with 'f'
-    'f',
   ]
 )
 subscription = client.subscribe(filter: filter)
@@ -64,10 +56,6 @@ filter = Nostr::Filter.new(
     # matches events that reference other events whose ids match these exact IDs
     'f111593a72cc52a7f0978de5ecf29b4653d0cf539f1fa50d2168fc1dc8280e52',
     'f1f9b0996d4ff1bf75e79e4cc8577c89eb633e68415c7faf74cf17a07bf80bd8',
-    # and match events that reference other events whose id starts with '76fbe'
-    '76fbe',
-    # and match events that reference other events whose id starts with 'b'
-    'b',
   ]
 )
 subscription = client.subscribe(filter: filter)
@@ -83,10 +71,6 @@ filter = Nostr::Filter.new(
     # matches events that reference other pubkeys that match these exact IDs
     'b698043170d580f8ae5bad4ac80b1fdb508e957f0bbffe97f2a8915fa8b34070',
     '51f853ff4894b062950e46ebed8c1c7015160f8173994414a96dd286f65f0f49',
-    # and match events that reference other pubkeys that start with 'db508e957'
-    'db508e957',
-    # and match events that reference other pubkeys that start with 'f'
-    'f',
   ]
 )
 subscription = client.subscribe(filter: filter)

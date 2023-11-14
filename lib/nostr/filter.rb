@@ -3,7 +3,7 @@
 module Nostr
   # A filter determines what events will be sent in a subscription.
   class Filter
-    # A list of event ids or prefixes
+    # A list of event ids
     #
     # @api public
     #
@@ -14,7 +14,7 @@ module Nostr
     #
     attr_reader :ids
 
-    # A list of pubkeys or prefixes, the pubkey of an event must be one of these
+    # A list of pubkeys, the pubkey of an event must be one of these
     #
     # @api public
     #
@@ -107,8 +107,8 @@ module Nostr
     #   )
     #
     # @param kwargs [Hash]
-    # @option kwargs [Array<String>, nil] ids A list of event ids or prefixes
-    # @option kwargs [Array<String>, nil] authors A list of pubkeys or prefixes, the pubkey of an event must be one
+    # @option kwargs [Array<String>, nil] ids A list of event ids
+    # @option kwargs [Array<String>, nil] authors A list of pubkeys, the pubkey of an event must be one
     # of these
     # @option kwargs [Array<Integer>, nil] kinds A list of a kind numbers
     # @option kwargs [Array<String>, nil] e A list of event ids that are referenced in an "e" tag
