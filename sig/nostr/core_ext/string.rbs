@@ -1,0 +1,11 @@
+module Nostr
+  module CoreExt
+    module String
+      def to_hex: () -> ::String
+      def to_nsec: () -> ::String
+      def to_npub: () -> ::String
+      def to_key: () -> Nostr::Key
+      def to_bech32: (::String) -> ::String
+    end
+  end
+end
