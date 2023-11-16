@@ -1,0 +1,65 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require 'bundler/setup'
+require 'pastel'
+require 'nostr'
+require 'json'
+require 'pp'
+require 'pry'
+require_relative 'pretty_event'
+
+pastel = Pastel.new
+client = Nostr::Client.new
+
+# relay = Nostr::Relay.new(url: 'wss://relay.service.mapboss.co.th', name: 'Mapboss')
+# relay = Nostr::Relay.new(url: 'wss://relay.blowater.app', name: 'Blowater')
+# relay = Nostr::Relay.new(url: 'wss://global.relay.red', name: 'Relay Red')
+# relay = Nostr::Relay.new(url: 'wss://brb.io', name: 'brb.io')
+relay = Nostr::Relay.new(url: 'wss://relay1.nostrchat.io', name: 'nostrchat.io')
+# relay = Nostr::Relay.new(url: 'wss://relay.snort.social', name: 'snort.social')
+# relay = Nostr::Relay.new(url: 'wss://nos.lol', name: 'nos.lol')
+client.connect(relay)
+
+$subscription = nil
+
+client.on :connect do
+  filter = Nostr::Filter.new(
+    limit: 20,
+    p: [
+      '40ecf59b56009813ea4c3081b19d9d525f76dbf251a5a0389b4bea27c3a6b98f'
+    ]
+  )
+
+  $subscription = client.subscribe(filter: filter)
+  puts pastel.green("Created subscription ##{$subscription.id}")
+
+  client.unsubscribe($subscription.id)
+end
+
+client.on :message do |raw_message|
+  message = JSON.parse(raw_message, symbolize_names: true)
+
+  case message
+  in [Nostr::RelayMessageType::EVENT, subscription_id, raw_event]
+    puts pastel.green("Received event for subscription ##{subscription_id}")
+    event = Nostr::Event.new(**raw_event)
+    puts PrettyEvent.new(event).inspect
+  in [Nostr::RelayMessageType::EOSE, subscription_id]
+    puts pastel.yellow("No more messages for subscription ##{subscription_id}")
+  in [Nostr::RelayMessageType::NOTICE, notice]
+    puts pastel.yellow("NOTICE: #{notice}")
+  else
+    puts message
+  end
+end
+
+client.on :error do |error_message|
+  puts pastel.red(error_message)
+end
+
+client.on :close do |code, reason|
+  puts pastel.red("Connection closed with code #{code} and reason #{reason}")
+end
+
+gets

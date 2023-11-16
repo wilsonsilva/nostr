@@ -39,5 +39,72 @@ module Nostr
     # @return [Integer]
     #
     ENCRYPTED_DIRECT_MESSAGE = 4
+
+    module_function
+
+    def get_description(kind)
+      description = case kind
+      in 0 then 'Metadata'
+      in 1 then 'Short Text Note'
+      in 2 then 'Recommend Relay'
+      in 3 then 'Contacts'
+      in 4 then 'Encrypted Direct Messages'
+      in 5 then 'Event Deletion'
+      in 6 then 'Repost'
+      in 7 then 'Reaction'
+      in 8 then 'Badge Award'
+      in 16 then 'Generic Repost'
+      in 40 then 'Channel Creation'
+      in 41 then 'Channel Metadata'
+      in 42 then 'Channel Message'
+      in 43 then 'Channel Hide Message'
+      in 44 then 'Channel Mute User'
+      in 1063 then 'File Metadata'
+      in 1311 then 'Live Chat Message'
+      in 1040 then 'OpenTimestamps'
+      in 1984 then 'Reporting'
+      in 1985 then 'Label'
+      in 4550 then 'Community Post Approval'
+      in 5000..5999 then 'Job Request'
+      in 6000..6999 then 'Job Result'
+      in 7000 then 'Job Feedback'
+      in 9041 then 'Zap Goal'
+      in 9734 then 'Zap Request'
+      in 9735 then 'Zap'
+      in 9802 then 'Highlights'
+      in 10000 then 'Mute List'
+      in 10001 then 'Pin List'
+      in 10002 then 'Relay List Metadata'
+      in 13194 then 'Wallet Info'
+      in 22242 then 'Client Authentication'
+      in 23194 then 'Wallet Request'
+      in 23195 then 'Wallet Response'
+      in 24133 then 'Nostr Connect'
+      in 27235 then 'HTTP Auth'
+      in 30000 then 'Categorized People List'
+      in 30001 then 'Categorized Bookmark List'
+      in 30008 then 'Profile Badges'
+      in 30009 then 'Badge Definition'
+      in 30017 then 'Create or update a stall'
+      in 30018 then 'Create or update a product'
+      in 30023 then 'Long-form Content'
+      in 30024 then 'Draft Long-form Content'
+      in 30078 then 'Application-specific Data'
+      in 30311 then 'Live Event'
+      in 30315 then 'User Statuses'
+      in 30402 then 'Classified Listing'
+      in 30403 then 'Draft Classified Listing'
+      in 31922 then 'Date-Based Calendar Event'
+      in 31923 then 'Time-Based Calendar Event'
+      in 31924 then 'Calendar'
+      in 31925 then 'Calendar Event RSVP'
+      in 31989 then 'Handler recommendation'
+      in 31990 then 'Handler information'
+      in 34550 then 'Community Definition'
+      else 'Unknown'
+      end
+
+      "#{description} (#{kind})"
+    end
   end
 end
