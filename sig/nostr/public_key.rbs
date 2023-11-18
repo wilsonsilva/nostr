@@ -1,0 +1,4 @@
+module Nostr
+  class PublicKey < Key
+  end
+end

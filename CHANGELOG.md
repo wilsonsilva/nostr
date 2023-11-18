@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 
 - Added relay message type enums `Nostr::RelayMessageType`
+- Client compliance with [NIP-19](https://github.com/nostr-protocol/nips/blob/master/10.md) (bech32-formatted strings)
 
 ### Changed
 

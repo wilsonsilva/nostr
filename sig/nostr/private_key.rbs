@@ -1,0 +1,4 @@
+module Nostr
+  class PrivateKey < Key
+  end
+end

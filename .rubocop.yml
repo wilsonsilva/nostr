@@ -11,6 +11,10 @@ AllCops:
 
 # ----------------------- Style -----------------------
 
+Style/RaiseArgs:
+  Exclude:
+    - 'lib/nostr/key.rb'
+
 Style/StringLiterals:
   Enabled: true
   EnforcedStyle: single_quotes
@@ -38,3 +42,9 @@ Metrics/ParameterLists:
 
 RSpec/ExampleLength:
   Enabled: false
+
+# ----------------------- Naming -----------------------
+
+Naming/MemoizedInstanceVariableName:
+  Exclude:
+    - 'spec/nostr/key.rb'

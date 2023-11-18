@@ -172,7 +172,7 @@ module Nostr
     # @example Signing an event
     #   event.sign(private_key)
     #
-    # @param private_key [String] 32-bytes hex-encoded private key.
+    # @param private_key [PrivateKey] 32-bytes hex-encoded private key.
     #
     # @return [Event] A signed event.
     #

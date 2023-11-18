@@ -1,13 +1,14 @@
 # Classes
 module Nostr
   class Keygen
-    def initialize: -> void
+    def initialize: -> Keygen
     def generate_key_pair: -> KeyPair
-    def generate_private_key: -> String
-    def extract_public_key: (String private_key) -> String
+    def generate_private_key: -> PrivateKey
+    def extract_public_key: (PrivateKey private_key) -> PublicKey
+    def get_key_pair_from_private_key: (private_key: PrivateKey) -> KeyPair
 
     private
 
-    attr_reader group: untyped
+    attr_reader group: ECDSA::Group
   end
 end

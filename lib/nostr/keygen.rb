@@ -44,10 +44,11 @@ module Nostr
     #   private_key = keygen.generate_private_key
     #   private_key # => '893c4cc8088924796b41dc788f7e2f746734497010b1a9f005c1faad7074b900'
     #
-    # @return [String] A 32-bytes hex-encoded private key.
+    # @return [PrivateKey] A 32-bytes hex-encoded private key.
     #
     def generate_private_key
-      (SecureRandom.random_number(group.order - 1) + 1).to_s(16)
+      hex_value = (SecureRandom.random_number(group.order - 1) + 1).to_s(16)
+      PrivateKey.new(hex_value)
     end
 
     # Extracts a public key from a private key
@@ -59,10 +60,36 @@ module Nostr
     #   public_key = keygen.extract_public_key(private_key)
     #   public_key # => '2d7661527d573cc8e84f665fa971dd969ba51e2526df00c149ff8e40a58f9558'
     #
-    # @return [String] A 32-bytes hex-encoded public key.
+    # @param [PrivateKey] private_key A 32-bytes hex-encoded private key.
+    #
+    # @raise [ArgumentError] if the private key is not an instance of +PrivateKey+
+    #
+    # @return [PublicKey] A 32-bytes hex-encoded public key.
     #
     def extract_public_key(private_key)
-      group.generator.multiply_by_scalar(private_key.to_i(16)).x.to_s(16).rjust(64, '0')
+      validate_private_key(private_key)
+      hex_value = group.generator.multiply_by_scalar(private_key.to_i(16)).x.to_s(16).rjust(64, '0')
+      PublicKey.new(hex_value)
+    end
+
+    # Builds a key pair from an existing private key
+    #
+    # @api public
+    #
+    # @example
+    #   private_key = Nostr::PrivateKey.new('893c4cc8088924796b41dc788f7e2f746734497010b1a9f005c1faad7074b900')
+    #   keygen.get_key_pair_from_private_key(private_key)
+    #
+    # @param private_key [PrivateKey] 32-bytes hex-encoded private key.
+    #
+    # @raise [ArgumentError] if the private key is not an instance of +PrivateKey+
+    #
+    # @return [Nostr::KeyPair]
+    #
+    def get_key_pair_from_private_key(private_key)
+      validate_private_key(private_key)
+      public_key = extract_public_key(private_key)
+      KeyPair.new(private_key:, public_key:)
     end
 
     private
@@ -74,5 +101,17 @@ module Nostr
     # @return [ECDSA::Group]
     #
     attr_reader :group
+
+    # Validates that the private key is an instance of +PrivateKey+
+    #
+    # @api private
+    #
+    # @raise [ArgumentError] if the private key is not an instance of +PrivateKey+
+    #
+    # @return [void]
+    #
+    def validate_private_key(private_key)
+      raise ArgumentError, 'private_key is not an instance of PrivateKey' unless private_key.is_a?(Nostr::PrivateKey)
+    end
   end
 end

@@ -1,0 +1,4 @@
+module Nostr
+  class KeyValidationError < Error
+  end
+end

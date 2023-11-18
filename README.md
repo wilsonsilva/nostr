@@ -51,11 +51,17 @@ client = Nostr::Client.new
 
 # a) Use an existing keypair
 keypair = Nostr::KeyPair.new(
-  private_key: 'add-your-private-key-here',
-  public_key: 'add-your-public-key-here',
+  private_key: Nostr::PrivateKey.new('add-your-hex-private-key-here'),
+  public_key: Nostr::PublicKey.new('add-your-hex-public-key-here'),
 )
 
-# b) Or create a new keypair
+# b) Or build a keypair from a private key
+keygen = Nostr::Keygen.new
+keypair = keygen.get_key_pair_from_private_key(
+  Nostr::PrivateKey.new('add-your-hex-private-key-here')
+)
+
+# c) Or create a new keypair
 keygen = Nostr::Keygen.new
 keypair = keygen.generate_keypair
 
