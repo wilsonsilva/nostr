@@ -47,17 +47,26 @@ module Nostr
     #     content: 'Your feedback is appreciated, now pay $8'
     #   )
     #
-    # @param event_attributes [Hash]
-    # @option event_attributes [String] :pubkey 32-bytes hex-encoded public key of the event creator.
-    # @option event_attributes [Integer] :created_at Date of the creation of the vent. A UNIX timestamp, in seconds.
-    # @option event_attributes [Integer] :kind The kind of the event. An integer from 0 to 3.
-    # @option event_attributes [Array<Array>] :tags  An array of tags. Each tag is an array of strings.
-    # @option event_attributes [String] :content Arbitrary string.
+    # @param created_at [Integer] Date of the creation of the vent. A UNIX timestamp, in seconds.
+    # @param kind [Integer] The kind of the event. An integer from 0 to 3.
+    # @param tags [Array<Array>] An array of tags. Each tag is an array of strings.
+    # @param content [String] Arbitrary string.
     #
     # @return [Event]
     #
-    def create_event(event_attributes)
-      event = Event.new(**event_attributes.merge(pubkey: keypair.public_key))
+    def create_event(
+      kind:,
+      content:,
+      created_at: Time.now.to_i,
+      tags: []
+    )
+      event = Event.new(
+        pubkey: keypair.public_key,
+        kind:,
+        content:,
+        created_at:,
+        tags:
+      )
       event.sign(keypair.private_key)
     end
   end

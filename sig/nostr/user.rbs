@@ -5,14 +5,10 @@ module Nostr
 
     def initialize: (?keypair: KeyPair | nil, ?keygen: Keygen) -> void
     def create_event: (
-      {
-        pubkey: String,
-        created_at: Integer,
-        kind: Integer,
-        tags: Array[String],
-        content: String,
-        created_at: Integer,
-      }
+      kind: Integer,
+      content: String,
+      ?created_at: Integer,
+      ?tags: Array[Array[String]],
     ) -> Event
 
     private
