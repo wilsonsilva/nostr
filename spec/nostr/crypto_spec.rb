@@ -69,11 +69,22 @@ RSpec.describe Nostr::Crypto do
       )
     end
 
-    it 'decrypts an encrypted text' do
-      encrypted_text = crypto.encrypt_text(sender_keypair.private_key, recipient_keypair.public_key, 'Twitter Files')
-      decrypted_text = crypto.decrypt_text(recipient_keypair.private_key, sender_keypair.public_key, encrypted_text)
+    context 'when the encrypted text includes an iv query string' do
+      it 'decrypts an encrypted text' do
+        encrypted_text = crypto.encrypt_text(sender_keypair.private_key, recipient_keypair.public_key, 'Twitter Files')
+        decrypted_text = crypto.decrypt_text(recipient_keypair.private_key, sender_keypair.public_key, encrypted_text)
 
-      expect(decrypted_text).to eq('Twitter Files')
+        expect(decrypted_text).to eq('Twitter Files')
+      end
+    end
+
+    context 'when the encrypted text does not include an iv query string' do
+      it 'returns an empty string' do
+        encrypted_text = 'wrYQaHDfpOEvyJELSCg1vzsywmlJTz8NqH03eFW44s8iQs869jtSb26Lr4s23gmY?it=v38vAJ3LlJAGZxbmWU4qAg=='
+        decrypted_text = crypto.decrypt_text(recipient_keypair.private_key, sender_keypair.public_key, encrypted_text)
+
+        expect(decrypted_text).to eq('')
+      end
     end
   end
 end

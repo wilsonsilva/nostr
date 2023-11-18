@@ -62,6 +62,10 @@ module Nostr
     #
     def decrypt_text(recipient_private_key, sender_public_key, encrypted_text)
       base64_encoded_text, iv = encrypted_text.split('?iv=')
+
+      # Ensure iv and base64_encoded_text are not nil
+      return '' unless iv && base64_encoded_text
+
       cipher = OpenSSL::Cipher.new(CIPHER_ALGORITHM).decrypt
       cipher.iv = Base64.decode64(iv)
       cipher.key = compute_shared_key(recipient_private_key, sender_public_key)
