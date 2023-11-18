@@ -1,6 +1,6 @@
 module Nostr
   class Crypto
-    BN_BASE: Integer
+    BN_BASE: 0 | 2 | 10 | 16
     CIPHER_CURVE: String
     CIPHER_ALGORITHM: String
 
