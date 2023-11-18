@@ -3,23 +3,14 @@ module Nostr
     attr_reader ids: Array[String]
     attr_reader authors: Array[String]
     attr_reader kinds: Array[Integer]
-    attr_reader e: String
-    attr_reader p: String
+    attr_reader e: Array[String]
+    attr_reader p: Array[String]
     attr_reader since: Integer
     attr_reader until: Integer
     attr_reader limit: Integer
 
     def initialize: (**untyped) -> void
-    def to_h: -> {
-      ids: Array[String],
-      authors: Array[String],
-      kinds: Array[Integer],
-      e: String,
-      p: String,
-      since: Integer,
-      until: Integer,
-      limit: Integer
-    }
+    def to_h: -> Hash[::Symbol, (::Array[::String] | ::Array[::Integer] | ::Integer)]
     def ==: (Filter other) -> bool
   end
 end
