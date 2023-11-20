@@ -22,7 +22,12 @@ keys and public keys
 - Updated the filter's documentation to reflect the removal of prefix matching
 - Updated the subscription's id documentation to reflect the changes in the protocol definition
 - Updated `Nostr::PrivateKey` and `Nostr::PublicKey` internally, instead of Strings
+- Updated the gem `bip-schnorr` to version `0.6` (was `0.4`)
+- Updated the gem `puma` to version `6.4` (was `6.3`)
+- Updated the gem `rake` to version `13.1` (was `13.0`)
 - Updated the gem `rbs` to version `3.3` (was `2.8`)
+- Updated the gem `rubocop` to version `1.57` (was `1.42`)
+- Updated the gem `rubocop-rspec` to version `2.25` (was `2.16`)
 - Updated the gem `steep` to version `1.6` (was `1.4`)
 
 ## Fixed

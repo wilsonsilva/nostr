@@ -9,6 +9,11 @@ AllCops:
   DisplayCopNames: true
   NewCops: enable
 
+# ----------------------- Gemspec -----------------------
+
+Gemspec/DevelopmentDependencies:
+  Enabled: false
+
 # ----------------------- Style -----------------------
 
 Style/RaiseArgs:
@@ -44,6 +49,10 @@ RSpec/ExampleLength:
   Enabled: false
 
 RSpec/FilePath:
+  Exclude:
+    - spec/nostr/errors/invalid_*
+
+RSpec/SpecFilePathFormat:
   Exclude:
     - spec/nostr/errors/invalid_*
 
