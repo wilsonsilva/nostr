@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'bech32'
-
 module Nostr
   # Abstract class for all keys
   #
@@ -50,11 +48,11 @@ module Nostr
     # @return [Key] the key.
     #
     def self.from_bech32(bech32_value)
-      entity = Bech32::Nostr::NIP19.decode(bech32_value)
+      type, data = Bech32.decode(bech32_value)
 
-      raise InvalidHRPError.new(entity.hrp, hrp) unless entity.hrp == hrp
+      raise InvalidHRPError.new(type, hrp) unless type == hrp
 
-      new(entity.data)
+      new(data)
     end
 
     # Abstract method to be implemented by subclasses to provide the HRP (npub, nsec)
@@ -81,7 +79,7 @@ module Nostr
     #
     # @return [String] The bech32 string representation of the key
     #
-    def to_bech32 = Bech32::Nostr::BareEntity.new(self.class.hrp, self).encode
+    def to_bech32 = Bech32.encode(hrp: self.class.hrp, data: self)
 
     protected
 

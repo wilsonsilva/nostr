@@ -131,6 +131,7 @@ I made a detailed documentation for this gem and it's usage. The code is also fu
 - [x] [NIP-01 - Basic protocol flow description](https://github.com/nostr-protocol/nips/blob/master/01.md)
 - [x] [NIP-02 - Contact List and Petnames](https://github.com/nostr-protocol/nips/blob/master/02.md)
 - [x] [NIP-04 - Encrypted Direct Message](https://github.com/nostr-protocol/nips/blob/master/04.md)
+- [x] [NIP-19 - Bech32-encoded entities](https://github.com/nostr-protocol/nips/blob/master/19.md)
 
 ## 🔨 Development
 

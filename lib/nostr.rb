@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative 'nostr/errors'
+require_relative 'nostr/bech32'
 require_relative 'nostr/crypto'
 require_relative 'nostr/version'
 require_relative 'nostr/keygen'

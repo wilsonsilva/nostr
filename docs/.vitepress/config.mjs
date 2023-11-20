@@ -75,6 +75,13 @@ export default defineConfig(withMermaid({
         ]
       },
       {
+        text: 'Common use cases',
+        collapsed: false,
+        items: [
+          { text: 'Bech32 enc/decoding (NIP-19)', link: '/common-use-cases/bech32-encoding-and-decoding-(NIP-19)' },
+        ]
+      },
+      {
         text: 'Implemented NIPs',
         link: '/implemented-nips',
       },

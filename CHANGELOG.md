@@ -9,8 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 
 - Added relay message type enums `Nostr::RelayMessageType`
-- Initial compliance with [NIP-19](https://github.com/nostr-protocol/nips/blob/master/19.md) - bech32-formatted private
-keys and public keys
+- Compliance with [NIP-19](https://github.com/nostr-protocol/nips/blob/master/19.md) - bech32-formatted strings
 - `Nostr::PrivateKey` and `Nostr::PublicKey` to represent private and public keys, respectively
 - Added a validation of private and public keys
 - Added an ability to convert keys to and from Bech32 format

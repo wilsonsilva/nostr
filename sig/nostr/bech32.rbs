@@ -1,0 +1,14 @@
+module Nostr
+  module Bech32
+    # Perhaps a bug in RBS/Steep. +decode+ and +encode+ are not recognized as public class methods.
+    def self?.decode: (String data) -> [String, String]
+    def self?.encode: (hrp: String, data: String) -> String
+
+    def naddr_encode: (pubkey: PublicKey, ?relays: Array[String], ?kind: Integer, ?identifier: String) -> String
+    def nevent_encode: (id: PublicKey, ?relays: Array[String], ?kind: Integer) -> String
+    def nprofile_encode: (pubkey: PublicKey, ?relays: Array[String]) -> String
+    def npub_encode: (String npub) -> String
+    def nrelay_encode: (String nrelay) -> String
+    def nsec_encode: (String nsec) -> String
+  end
+end
