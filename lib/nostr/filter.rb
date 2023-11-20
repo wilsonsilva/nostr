@@ -133,13 +133,16 @@ module Nostr
     # @api public
     #
     # @example
-    #   filter.to_h # => {:ids=>["c24881c305c5cfb7c1168be7e9b0e150"],
-    #    :authors=>["000000001c5c45196786e79f83d21fe801549fdc98e2c26f96dcef068a5dbcd7"],
-    #    :kinds=>[0, 1, 2],
-    #    :"#e"=>["7bdb422f254194ae4bb86d354c0bd5a888fce233ffc77dceb3e844ceec1fcfb2"],
-    #    :"#p"=>["000000001c5c45196786e79f83d21fe801549fdc98e2c26f96dcef068a5dbcd7"],
-    #    :since=>1230981305,
-    #    :until=>1292190341}
+    #   filter.to_h # =>
+    #   {
+    #      ids: ['c24881c305c5cfb7c1168be7e9b0e150'],
+    #      authors: ['000000001c5c45196786e79f83d21fe801549fdc98e2c26f96dcef068a5dbcd7'],
+    #      kinds: [0, 1, 2],
+    #      '#e': ['7bdb422f254194ae4bb86d354c0bd5a888fce233ffc77dceb3e844ceec1fcfb2'],
+    #      '#p': ['000000001c5c45196786e79f83d21fe801549fdc98e2c26f96dcef068a5dbcd7'],
+    #      since: 1230981305,
+    #      until: 1292190341
+    #   }
     #
     # @return [Hash] The filter as a hash.
     #

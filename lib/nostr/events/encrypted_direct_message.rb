@@ -11,19 +11,19 @@ module Nostr
       # @api public
       #
       # @example Instantiating a new encrypted direct message
-      #   Nostr::Events::EncryptedDirectMessage.new(
+      #  Nostr::Events::EncryptedDirectMessage.new(
       #    sender_private_key: 'ccf9fdf3e1466d7c20969c71ec98defcf5f54aee088513e1b73ccb7bd770d460',
       #    recipient_public_key: '48df4af6e240ac5f7c5de89bf5941b249880be0e87d03685b178ccb1a315f52e',
       #    plain_text: 'Your feedback is appreciated, now pay $8',
-      # )
+      #  )
       #
       # @example Instantiating a new encrypted direct message that references a previous direct message
-      #   Nostr::Events::EncryptedDirectMessage.new(
+      #  Nostr::Events::EncryptedDirectMessage.new(
       #    sender_private_key: 'ccf9fdf3e1466d7c20969c71ec98defcf5f54aee088513e1b73ccb7bd770d460',
       #    recipient_public_key: '48df4af6e240ac5f7c5de89bf5941b249880be0e87d03685b178ccb1a315f52e',
       #    plain_text: 'Your feedback is appreciated, now pay $8',
       #    previous_direct_message: 'ccf9fdf3e1466d7c20969c71ec98defcf5f54aee088513e1b73ccb7bd770d460'
-      # )
+      #  )
       #
       # @param plain_text [String] The +content+ of the encrypted message.
       # @param sender_private_key [PrivateKey] 32-bytes hex-encoded private key of the message's author.

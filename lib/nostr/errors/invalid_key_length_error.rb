@@ -9,7 +9,7 @@ module Nostr
     # Initializes the error
     #
     # @example
-    #   InvalidKeyLengthError.new('private'')
+    #   InvalidKeyLengthError.new('private')
     #
     # @param [String] key_kind The kind of key that is invalid (public or private)
     #

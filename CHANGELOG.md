@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.1.1/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Fixed
+
+- Fixed YARD example rendering issues in `InvalidKeyFormatError#initialize`, `InvalidKeyLengthError#initialize`,
+`InvalidKeyTypeError#initialize`, `Event#initialize`, `EncryptedDirectMessage#initialize` and `Filter#to_h`
+
 ## [0.5.0] 2023-11-20
 
 ### Added
@@ -82,6 +89,7 @@ principles of immutability and was a major source of internal complexity as I ne
 
 - Initial release
 
+[unreleased]: https://github.com/wilsonsilva/nostr/compare/v0.5.0...HEAD
 [0.5.0]: https://github.com/wilsonsilva/nostr/compare/v0.4.0...v0.5.0
 [0.4.0]: https://github.com/wilsonsilva/nostr/compare/v0.3.0...v0.4.0
 [0.3.0]: https://github.com/wilsonsilva/nostr/compare/v0.2.0...v0.3.0

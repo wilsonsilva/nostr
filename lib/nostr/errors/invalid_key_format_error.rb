@@ -9,7 +9,7 @@ module Nostr
     # Initializes the error
     #
     # @example
-    #   InvalidKeyFormatError.new('private'')
+    #   InvalidKeyFormatError.new('private')
     #
     # @param [String] key_kind The kind of key that is invalid (public or private)
     #

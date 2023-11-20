@@ -100,15 +100,15 @@ module Nostr
     #
     # @example Instantiating a new event
     #   Nostr::Event.new(
-    #    id: 'ccf9fdf3e1466d7c20969c71ec98defcf5f54aee088513e1b73ccb7bd770d460',
-    #    pubkey: '48df4af6e240ac5f7c5de89bf5941b249880be0e87d03685b178ccb1a315f52e',
-    #    created_at: 1230981305,
-    #    kind: 1,
-    #    tags: [],
-    #    content: 'Your feedback is appreciated, now pay $8',
-    #    sig: '123ac2923b792ce730b3da34f16155470ab13c8f97f9c53eaeb334f1fb3a5dc9a7f643
-    #          937c6d6e9855477638f5655c5d89c9aa5501ea9b578a66aced4f1cd7b3'
-    # )
+    #     id: 'ccf9fdf3e1466d7c20969c71ec98defcf5f54aee088513e1b73ccb7bd770d460',
+    #     pubkey: '48df4af6e240ac5f7c5de89bf5941b249880be0e87d03685b178ccb1a315f52e',
+    #     created_at: 1230981305,
+    #     kind: 1,
+    #     tags: [],
+    #     content: 'Your feedback is appreciated, now pay $8',
+    #     sig: '123ac2923b792ce730b3da34f16155470ab13c8f97f9c53eaeb334f1fb3a5dc9a7f643
+    #           937c6d6e9855477638f5655c5d89c9aa5501ea9b578a66aced4f1cd7b3'
+    #   )
     #
     # @param id [String|nil] 32-bytes sha256 of the the serialized event data.
     # @param sig [String|nil] 64-bytes signature of the sha256 hash of the serialized event data, which is
