@@ -1,0 +1,21 @@
+# Added only to satisfy the Steep requirements. Not 100% reliable.
+module Bech32
+  class SegwitAddr
+    HRP_MAINNET: String
+    HRP_TESTNET: String
+    HRP_REGTEST: String
+
+    attr_accessor hrp: String
+    attr_accessor ver: (Float | Integer | String)?
+    attr_accessor prog: Array[(Float | Integer | String)?]
+
+    def initialize: (?nil addr) -> void
+    def to_script_pubkey: -> ((Float | Integer | String)?)
+    def script_pubkey=: (untyped script_pubkey) -> (Array[(Float | Integer | String)?])
+    def addr: -> untyped
+
+    private
+
+    def parse_addr: (untyped addr) -> nil
+  end
+end

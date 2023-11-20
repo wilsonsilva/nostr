@@ -1,0 +1,16 @@
+module Nostr
+  class Key < String
+    FORMAT: Regexp
+    LENGTH: int
+
+    def self.from_bech32: (String) -> Key
+    def self.hrp: -> String
+
+    def initialize: (String) -> void
+    def to_bech32: -> String
+
+    private
+
+    def validate_hex_value: (String) -> nil
+  end
+end

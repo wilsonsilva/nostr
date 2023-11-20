@@ -1,0 +1,20 @@
+# Added only to satisfy the Steep requirements. Not 100% reliable.
+module Bech32
+  module Nostr
+    module NIP19
+      HRP_PUBKEY: String
+      HRP_PRIVATE_KEY: String
+      HRP_NOTE_ID: String
+      HRP_PROFILE: String
+      HRP_EVENT: String
+      HRP_RELAY: String
+      HRP_EVENT_COORDINATE: String
+      BARE_PREFIXES: [String, String, String]
+      TLV_PREFIXES: [String, String, String, String]
+      ALL_PREFIXES: Array[String]
+
+      def decode: (untyped string) -> untyped
+      def self.decode: (untyped string) -> untyped
+    end
+  end
+end

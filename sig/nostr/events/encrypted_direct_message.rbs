@@ -3,8 +3,8 @@ module Nostr
     class EncryptedDirectMessage < Event
       def initialize: (
           plain_text: String,
-          sender_private_key: String,
-          recipient_public_key: String,
+          sender_private_key: PrivateKey,
+          recipient_public_key: PublicKey,
           ?previous_direct_message: String|nil
         ) -> void
     end

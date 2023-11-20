@@ -1,0 +1,43 @@
+# Added only to satisfy the Steep requirements. Not 100% reliable.
+module Faye
+  class WebSocket
+    class Client
+      DEFAULT_PORTS: Hash[String, Integer]
+      SECURE_PROTOCOLS: [String, String]
+
+      include EventEmitter
+      include API
+
+      @url: untyped
+      @endpoint: untyped
+      @origin_tls: Hash[untyped, untyped]
+      @socket_tls: Hash[untyped, untyped]
+      @driver: bot
+      @proxy: nil
+      @ssl_verifier: untyped
+      @stream: untyped
+
+      def initialize: (untyped url, ?Array[String] protocols, ?Hash[untyped, untyped] options) -> void
+
+      private
+
+      def configure_proxy: (Hash[untyped, untyped] proxy) -> nil
+      def start_tls: (untyped uri, Hash[untyped, untyped] options) -> nil
+      def on_connect: (untyped stream) -> untyped
+      def on_network_error: (nil error) -> untyped
+      def ssl_verify_peer: (untyped cert) -> untyped
+      def ssl_handshake_completed: -> untyped
+
+      module Connection
+        attr_accessor parent: bot
+
+        def connection_completed: -> untyped
+        def ssl_verify_peer: (untyped cert) -> untyped
+        def ssl_handshake_completed: -> untyped
+        def receive_data: (untyped data) -> untyped
+        def unbind: (?nil error) -> untyped
+        def write: (untyped data) -> nil
+      end
+    end
+  end
+end

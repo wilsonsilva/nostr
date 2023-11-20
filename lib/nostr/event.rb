@@ -159,11 +159,11 @@ module Nostr
     #   pubkey = '48df4af6e240ac5f7c5de89bf5941b249880be0e87d03685b178ccb1a315f52e'
     #   event.add_pubkey_reference(pubkey)
     #
-    # @param pubkey [String] 32-bytes hex-encoded public key.
+    # @param pubkey [PublicKey] 32-bytes hex-encoded public key.
     #
     # @return [Array<String>] The event's updated list of tags
     #
-    def add_pubkey_reference(pubkey) = tags.push(['p', pubkey])
+    def add_pubkey_reference(pubkey) = tags.push(['p', pubkey.to_s])
 
     # Signs an event with the user's private key
     #
@@ -172,7 +172,7 @@ module Nostr
     # @example Signing an event
     #   event.sign(private_key)
     #
-    # @param private_key [String] 32-bytes hex-encoded private key.
+    # @param private_key [PrivateKey] 32-bytes hex-encoded private key.
     #
     # @return [Event] A signed event.
     #

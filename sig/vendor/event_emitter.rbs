@@ -1,9 +1,16 @@
 # Added only to satisfy the Steep requirements. Not 100% reliable.
 module EventEmitter
-  def add_listener: (untyped `type`, ?{once: true} params) -> Integer
+  interface _Event
+    def data: -> String
+    def message: -> String
+    def code: -> Integer
+    def reason: -> String
+  end
+
+  def add_listener: (Symbol event_name) { (_Event event) -> void } -> void
   alias on add_listener
 
   def remove_listener: (untyped id_or_type) -> Array[untyped]?
-  def emit: (untyped `type`, *untyped data) -> Array[untyped]
-  def once: (untyped `type`) -> Integer
+  def emit: (Symbol `type`, *untyped data) -> Array[untyped]
+  def once: (Symbol `type`) -> Integer
 end

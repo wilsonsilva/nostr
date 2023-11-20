@@ -4,17 +4,33 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.1.1/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [0.5.0] 2023-11-20
 
 ### Added
 
 - Added relay message type enums `Nostr::RelayMessageType`
+- Initial compliance with [NIP-19](https://github.com/nostr-protocol/nips/blob/master/19.md) - bech32-formatted private
+keys and public keys
+- `Nostr::PrivateKey` and `Nostr::PublicKey` to represent private and public keys, respectively
+- Added a validation of private and public keys
+- Added an ability to convert keys to and from Bech32 format
+- Added RBS types for `faye-websocket` and `bech32`
 
 ### Changed
 
 - Set the gem's homepage to [`https://nostr-ruby.com/`](https://nostr-ruby.com/)
 - Updated the filter's documentation to reflect the removal of prefix matching
 - Updated the subscription's id documentation to reflect the changes in the protocol definition
+- Updated `Nostr::PrivateKey` and `Nostr::PublicKey` internally, instead of Strings
+- Updated the gem `rbs` to version `3.3` (was `2.8`)
+- Updated the gem `steep` to version `1.6` (was `1.4`)
+
+## Fixed
+
+- Fixed the RBS type of the constant `Nostr::Crypto::BN_BASE`
+- Fixed the return type of `Nostr::Crypto#decrypt_text` when given an invalid ciphertext
+- Fixed the RBS type of `Nostr::Filter#to_h`, `Nostr::Filter#e` and `Nostr::Filter#p`
+- Fixed the RBS types of `EventEmitter` and `EventMachine::Channel`
 
 ## [0.4.0] - 2023-02-25
 
@@ -61,7 +77,7 @@ principles of immutability and was a major source of internal complexity as I ne
 
 - Initial release
 
-[unreleased]: https://github.com/wilsonsilva/nostr/compare/v0.4.0...HEAD
+[0.5.0]: https://github.com/wilsonsilva/nostr/compare/v0.4.0...v0.5.0
 [0.4.0]: https://github.com/wilsonsilva/nostr/compare/v0.3.0...v0.4.0
 [0.3.0]: https://github.com/wilsonsilva/nostr/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/wilsonsilva/nostr/compare/v0.1.0...v0.2.0

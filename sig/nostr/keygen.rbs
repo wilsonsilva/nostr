@@ -3,11 +3,14 @@ module Nostr
   class Keygen
     def initialize: -> void
     def generate_key_pair: -> KeyPair
-    def generate_private_key: -> String
-    def extract_public_key: (String private_key) -> String
+    def generate_private_key: -> PrivateKey
+    def extract_public_key: (PrivateKey private_key) -> PublicKey
+    def get_key_pair_from_private_key: (PrivateKey private_key) -> KeyPair
 
     private
 
     attr_reader group: untyped
+
+    def validate_private_key: (PrivateKey private_key) -> void
   end
 end

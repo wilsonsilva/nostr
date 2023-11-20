@@ -4,13 +4,13 @@ module Nostr
     CIPHER_CURVE: String
     CIPHER_ALGORITHM: String
 
-    def encrypt_text: (String, String, String) -> String
-    def decrypt_text: (String, String, String) -> String
-    def sign_event: (Event, String) -> Event
+    def encrypt_text: (PrivateKey, PublicKey, String) -> String
+    def decrypt_text: (PrivateKey, PublicKey, String) -> String
+    def sign_event: (Event, PrivateKey) -> Event
 
     private
 
-    def compute_shared_key: (String, String) -> String
+    def compute_shared_key: (PrivateKey, PublicKey) -> String
     def hash_event:(Event) -> String
   end
 end

@@ -5,8 +5,8 @@ require 'spec_helper'
 RSpec.describe Nostr::User do
   let(:keypair) do
     Nostr::KeyPair.new(
-      private_key: '893c4cc8088924796b41dc788f7e2f746734497010b1a9f005c1faad7074b900',
-      public_key: '2d7661527d573cc8e84f665fa971dd969ba51e2526df00c149ff8e40a58f9558'
+      private_key: Nostr::PrivateKey.new('893c4cc8088924796b41dc788f7e2f746734497010b1a9f005c1faad7074b900'),
+      public_key: Nostr::PublicKey.new('2d7661527d573cc8e84f665fa971dd969ba51e2526df00c149ff8e40a58f9558')
     )
   end
 

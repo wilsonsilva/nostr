@@ -6,7 +6,7 @@ module EventMachine
 
     def initialize: -> void
     def num_subscribers: -> Integer
-    def subscribe: (*untyped a) ?{ -> untyped } -> Integer
+    def subscribe: (*untyped a) ?{ (untyped) -> untyped } -> Integer
     def unsubscribe: (untyped name) -> untyped
     def push: (*untyped items) -> untyped
     alias << push

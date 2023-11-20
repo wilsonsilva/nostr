@@ -26,8 +26,9 @@ module Nostr
       # )
       #
       # @param plain_text [String] The +content+ of the encrypted message.
-      # @param sender_private_key [String] 32-bytes hex-encoded private key of the message's author.
-      # @param recipient_public_key [String] 32-bytes hex-encoded public key of the recipient of the encrypted message.
+      # @param sender_private_key [PrivateKey] 32-bytes hex-encoded private key of the message's author.
+      # @param recipient_public_key [PublicKey] 32-bytes hex-encoded public key of the recipient of the encrypted
+      #  message.
       # @param previous_direct_message [String] 32-bytes hex-encoded id identifying the previous message in a
       # conversation or a message we are explicitly replying to (such that contextual, more organized conversations
       # may happen

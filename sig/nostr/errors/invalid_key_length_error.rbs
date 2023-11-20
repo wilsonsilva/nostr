@@ -1,0 +1,5 @@
+module Nostr
+  class InvalidKeyLengthError < KeyValidationError
+    def initialize: (String) -> void
+  end
+end

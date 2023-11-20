@@ -1,0 +1,30 @@
+# Added only to satisfy the Steep requirements. Not 100% reliable.
+module Faye
+  class WebSocket
+    ADAPTERS: Hash[String, :Goliath | :Rainbows | :Thin]
+
+    @url: String
+    @driver_started: false
+    @stream: Stream
+    @driver: bot
+
+    def self.determine_url: (untyped env, ?[String, String] schemes) -> String
+    def self.ensure_reactor_running: -> nil
+    def self.load_adapter: (untyped backend) -> bool?
+    def self.secure_request?: (untyped env) -> bool
+    def self.websocket?: (untyped env) -> untyped
+
+    attr_reader env: untyped
+
+    def initialize: (untyped env, ?nil protocols, ?Hash[untyped, untyped] options) -> void
+    def start_driver: -> nil
+    def rack_response: -> [Integer, Hash[untyped, untyped], Array[untyped]]
+
+    class Stream
+      @socket_object: bot
+
+      def fail: -> untyped
+      def receive: (untyped data) -> untyped
+    end
+  end
+end

@@ -1,6 +1,6 @@
 module Nostr
   class Event
-    attr_reader pubkey: String
+    attr_reader pubkey: PublicKey
     attr_reader created_at: Integer
     attr_reader kind: Integer
     attr_reader tags: Array[Array[String]]
@@ -9,7 +9,7 @@ module Nostr
     attr_accessor sig: String?|nil
 
     def initialize: (
-      pubkey: String,
+      pubkey: PublicKey,
       kind: Integer,
       content: String,
       ?created_at: Integer,
@@ -31,9 +31,9 @@ module Nostr
     }
     def ==: (Event other) -> bool
 
-    def sign:(String) -> Event
+    def sign:(PrivateKey) -> Event
 
     def add_event_reference: (String) -> Array[Array[String]]
-    def add_pubkey_reference: (String) -> Array[Array[String]]
+    def add_pubkey_reference: (PublicKey) -> Array[Array[String]]
   end
 end

@@ -1,9 +1,13 @@
 # Classes
 module Nostr
   class KeyPair
-    attr_reader private_key: String
-    attr_reader public_key: String
+    attr_reader private_key: PrivateKey
+    attr_reader public_key: PublicKey
 
-    def initialize: (private_key: String, public_key: String) -> void
+    def initialize: (private_key: PrivateKey, public_key: PublicKey) -> void
+
+    private
+
+    def validate_keys: (PrivateKey, PublicKey) -> void
   end
 end

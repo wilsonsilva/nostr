@@ -1,0 +1,25 @@
+# Added only to satisfy the Steep requirements. Not 100% reliable.
+module Bech32
+  SEPARATOR: String
+  BECH32M_CONST: Integer
+
+  def encode: (untyped hrp, untyped data, untyped spec) -> untyped
+  def self.encode: (untyped hrp, untyped data, untyped spec) -> untyped
+  def decode: (untyped bech, ?Integer max_length) -> [untyped, untyped, Integer]?
+  def self.decode: (untyped bech, ?Integer max_length) -> [untyped, untyped, Integer]?
+  def create_checksum: (untyped hrp, untyped data, untyped spec) -> Array[Integer]
+  def self.create_checksum: (untyped hrp, untyped data, untyped spec) -> Array[Integer]
+  def verify_checksum: (untyped hrp, untyped data) -> Integer?
+  def self.verify_checksum: (untyped hrp, untyped data) -> Integer?
+  def expand_hrp: (untyped hrp) -> untyped
+  def self.expand_hrp: (untyped hrp) -> untyped
+  def convert_bits: (untyped data, untyped from, untyped to, ?true padding) -> Array[Integer]?
+  def self.convert_bits: (untyped data, untyped from, untyped to, ?true padding) -> Array[Integer]?
+  def polymod: (untyped values) -> Integer
+  def self.polymod: (untyped values) -> Integer
+
+  module Encoding
+    BECH32: Integer
+    BECH32M: Integer
+  end
+end

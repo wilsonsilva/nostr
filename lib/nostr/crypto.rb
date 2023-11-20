@@ -30,8 +30,8 @@ module Nostr
     #   encrypted = crypto.encrypt_text(sender_private_key, recipient_public_key, 'Feedback appreciated. Now pay $8')
     #   encrypted # => "wrYQaHDfpOEvyJELSCg1vzsywmlJTz8NqH03eFW44s8iQs869jtSb26Lr4s23gmY?iv=v38vAJ3LlJAGZxbmWU4qAg=="
     #
-    # @param sender_private_key [String] 32-bytes hex-encoded private key of the creator.
-    # @param recipient_public_key [String] 32-bytes hex-encoded public key of the recipient.
+    # @param sender_private_key [PrivateKey] 32-bytes hex-encoded private key of the creator.
+    # @param recipient_public_key [PublicKey] 32-bytes hex-encoded public key of the recipient.
     # @param plain_text [String] The text to be encrypted
     #
     # @return [String] Encrypted text.
@@ -54,8 +54,8 @@ module Nostr
     #   encrypted # => "wrYQaHDfpOEvyJELSCg1vzsywmlJTz8NqH03eFW44s8iQs869jtSb26Lr4s23gmY?iv=v38vAJ3LlJAGZxbmWU4qAg=="
     #   decrypted = crypto.decrypt_text(recipient_private_key, sender_public_key, encrypted)
     #
-    # @param sender_public_key [String] 32-bytes hex-encoded public key of the message creator.
-    # @param recipient_private_key [String] 32-bytes hex-encoded public key of the recipient.
+    # @param sender_public_key [PublicKey] 32-bytes hex-encoded public key of the message creator.
+    # @param recipient_private_key [PrivateKey] 32-bytes hex-encoded public key of the recipient.
     # @param encrypted_text [String] The text to be decrypted
     #
     # @return [String] Decrypted text.
@@ -84,7 +84,7 @@ module Nostr
     #   event.sig # => a signature
     #
     # @param event [Event] The event to be signed
-    # @param private_key [String] 32-bytes hex-encoded private key.
+    # @param private_key [PrivateKey] 32-bytes hex-encoded private key.
     #
     # @return [Event] An unsigned event.
     #
@@ -107,8 +107,8 @@ module Nostr
     #
     # @api private
     #
-    # @param private_key [String] 32-bytes hex-encoded private key.
-    # @param public_key [String] 32-bytes hex-encoded public key.
+    # @param private_key [PrivateKey] 32-bytes hex-encoded private key.
+    # @param public_key [PublicKey] 32-bytes hex-encoded public key.
     #
     # @return [String] A shared key used in the event's content encryption and decryption.
     #

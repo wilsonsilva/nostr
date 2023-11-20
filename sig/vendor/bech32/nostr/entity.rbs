@@ -1,0 +1,41 @@
+# Added only to satisfy the Steep requirements. Not 100% reliable.
+module Bech32
+  module Nostr
+    class BareEntity
+      attr_reader hrp: untyped
+      attr_reader data: untyped
+
+      def initialize: (untyped hrp, untyped data) -> void
+      def encode: -> untyped
+    end
+
+    class TLVEntry
+      attr_reader type: (Float | Integer | String)?
+      attr_reader label: String?
+      attr_reader value: (Float | Integer | String)?
+
+      def initialize: ((Float | Integer | String)? `type`, (Float | Integer | String)? value, ?String? label) -> void
+      def to_payload: -> String
+      def to_s: -> String
+
+      private
+
+      def hex_string?: ((Float | Integer | String)? str) -> bool
+    end
+
+    class TLVEntity
+      TYPE_SPECIAL: Integer
+      TYPE_RELAY: Integer
+      TYPE_AUTHOR: Integer
+      TYPE_KIND: Integer
+      TYPES: [Integer, Integer, Integer, Integer]
+
+      attr_reader hrp: untyped
+      attr_reader entries: Array[TLVEntry]
+
+      def initialize: (untyped hrp, Array[TLVEntry] entries) -> void
+      def self.parse: (untyped hrp, untyped data) -> TLVEntity
+      def encode: -> untyped
+    end
+  end
+end

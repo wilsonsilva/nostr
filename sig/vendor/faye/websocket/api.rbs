@@ -1,0 +1,45 @@
+# Added only to satisfy the Steep requirements. Not 100% reliable.
+module Faye
+  class WebSocket
+    module API
+      CONNECTING: Integer
+      OPEN: Integer
+      CLOSING: Integer
+      CLOSED: Integer
+      CLOSE_TIMEOUT: Integer
+
+      @driver: untyped
+      @ping: nil
+      @ping_id: Integer
+      @stream: nil
+      @proxy: nil
+      @ping_timer: nil
+      @close_timer: nil
+      @close_params: [String, Integer]?
+      @onerror: nil
+      @onclose: nil
+      @onmessage: nil
+      @onopen: nil
+
+      attr_reader url: untyped
+      attr_reader ready_state: Integer
+      attr_reader buffered_amount: Integer
+
+      def initialize: (?Hash[untyped, untyped] options) -> void
+      def write: (untyped data) -> untyped
+      def send: (untyped message) -> false
+      def ping: (?String message) -> false
+      def close: (?nil code, ?nil reason) -> untyped
+      def protocol: -> String
+
+      private
+
+      def open: -> nil
+      def receive_message: (untyped data) -> nil
+      def emit_error: (untyped message) -> nil
+      def begin_close: (String reason, Integer code, ?Hash[untyped, untyped] options) -> nil
+      def finalize_close: -> nil
+      def parse: (untyped data) -> untyped
+    end
+  end
+end
