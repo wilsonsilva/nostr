@@ -29,7 +29,6 @@ export default defineConfig(withMermaid({
     sidebar: [
       {
         text: 'Getting started',
-        link: '/getting-started',
         collapsed: false,
         items: [
           { text: 'Overview', link: '/getting-started/overview' },
