@@ -47,7 +47,7 @@ module Nostr
     # @return [PrivateKey] A 32-bytes hex-encoded private key.
     #
     def generate_private_key
-      hex_value = (SecureRandom.random_number(group.order - 1) + 1).to_s(16)
+      hex_value = (SecureRandom.random_number(group.order - 1) + 1).to_s(16).rjust(64, '0')
       PrivateKey.new(hex_value)
     end
 

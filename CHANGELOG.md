@@ -36,6 +36,7 @@ keys and public keys
 - Fixed the return type of `Nostr::Crypto#decrypt_text` when given an invalid ciphertext
 - Fixed the RBS type of `Nostr::Filter#to_h`, `Nostr::Filter#e` and `Nostr::Filter#p`
 - Fixed the RBS types of `EventEmitter` and `EventMachine::Channel`
+- Fixed the generation of private keys
 
 ## [0.4.0] - 2023-02-25
 
