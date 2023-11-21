@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Added
+
+- Added Architecture Decision Records (ADRs) to document architectural decisions
+
 ### Fixed
 
 - Fixed YARD example rendering issues in `InvalidKeyFormatError#initialize`, `InvalidKeyLengthError#initialize`,
