@@ -21,6 +21,7 @@ module Nostr
     # The content is set to the URL (e.g., wss://somerelay.com) of a relay the event creator wants to
     # recommend to its followers.
     #
+    # @deprecated This event kind was removed in https://github.com/nostr-protocol/nips/pull/703/files#diff-39307f1617417657ee9874be314f13aabdc74401b124d0afe8217f2919c9c7d8L105
     # @return [Integer]
     #
     RECOMMEND_SERVER = 2
