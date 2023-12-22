@@ -18,14 +18,14 @@ module Nostr
     #
     LENGTH = 64
 
-    # Instantiates a new key. Can't be used directly because this is an abstract class. Raises a +ValidationError+
+    # Instantiates a new key. Can't be used directly because this is an abstract class. Raises a +KeyValidationError+
     #
     # @see Nostr::PrivateKey
     # @see Nostr::PublicKey
     #
     # @param [String] hex_value Hex-encoded value of the key
     #
-    # @raise [ValidationError]
+    # @raise [KeyValidationError]
     #
     def initialize(hex_value)
       validate_hex_value(hex_value)
