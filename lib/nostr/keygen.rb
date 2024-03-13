@@ -22,7 +22,7 @@ module Nostr
     # @api public
     #
     # @example
-    #   keypair = keygen.generate_keypair
+    #   keypair = keygen.generate_key_pair
     #   keypair # #<Nostr::KeyPair:0x0000000107bd3550
     #    @private_key="893c4cc8088924796b41dc788f7e2f746734497010b1a9f005c1faad7074b900",
     #    @public_key="2d7661527d573cc8e84f665fa971dd969ba51e2526df00c149ff8e40a58f9558">

@@ -63,7 +63,7 @@ keypair = keygen.get_key_pair_from_private_key(
 
 # c) Or create a new keypair
 keygen = Nostr::Keygen.new
-keypair = keygen.generate_keypair
+keypair = keygen.generate_key_pair
 
 # Create a user with the keypair
 user = Nostr::User.new(keypair: keypair)
