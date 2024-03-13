@@ -68,8 +68,8 @@ RSpec.describe Nostr::User do
             kind: 1,
             tags: [%w[e 189df012cfff8a075785b884bd702025f4a7a37710f581c4ac9d33e24b585408]],
             content: 'Your feedback is appreciated, now pay $8',
-            sig: '970fea8d213da86c583804522c45d04e61c18c433704b62f793f187bca82091c' \
-                 '3884d6207c6511c0966ecf6230082179a49257b03e5a4d2d08da9124a190f1bb'
+            sig: '6e852020d5c70527674a21ab7d47db3c355cdbac443a80f5fe2b956f536b75b1' \
+                 '3fdfb28a2ffc09cb2438a61b020aaa62e8df7bb08471ccf7839a48350e485937'
           )
         )
       end
@@ -92,8 +92,8 @@ RSpec.describe Nostr::User do
             kind: 1,
             tags: [],
             content: 'Your feedback is appreciated, now pay $8',
-            sig: 'f5a2cdc29723c888df52afd6f8c6e260110f74ed23fee3edbf39fff4a9f1b9f1' \
-                 'c93284b02d4eba0481325bb5555624ddf969d5905b63f17191f9132a0ddd97b0'
+            sig: '48256fea31f2cabf0e92b5f67c2f654c9647be15b8bc6f381673af3748e15c76' \
+                 'b8d505019fc4e75d79be668c18f57b69b76d95b639cca8ae9a5817d569a8d12b'
           )
         )
       end
@@ -116,8 +116,8 @@ RSpec.describe Nostr::User do
             kind: 1,
             tags: [%w[e 189df012cfff8a075785b884bd702025f4a7a37710f581c4ac9d33e24b585408]],
             content: 'Your feedback is appreciated, now pay $8',
-            sig: '970fea8d213da86c583804522c45d04e61c18c433704b62f793f187bca82091c' \
-                 '3884d6207c6511c0966ecf6230082179a49257b03e5a4d2d08da9124a190f1bb'
+            sig: '6e852020d5c70527674a21ab7d47db3c355cdbac443a80f5fe2b956f536b75b1' \
+                 '3fdfb28a2ffc09cb2438a61b020aaa62e8df7bb08471ccf7839a48350e485937'
           )
         )
       end
