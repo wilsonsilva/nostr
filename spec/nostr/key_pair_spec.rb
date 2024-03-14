@@ -56,4 +56,15 @@ RSpec.describe Nostr::KeyPair do
       expect(keypair.public_key).to eq('2d7661527d573cc8e84f665fa971dd969ba51e2526df00c149ff8e40a58f9558')
     end
   end
+
+  describe '#to_ary' do
+    it 'converts the key pair to an array' do
+      expect(keypair.to_ary).to eq(
+        [
+          Nostr::PrivateKey.new('893c4cc8088924796b41dc788f7e2f746734497010b1a9f005c1faad7074b900'),
+          Nostr::PublicKey.new('2d7661527d573cc8e84f665fa971dd969ba51e2526df00c149ff8e40a58f9558')
+        ]
+      )
+    end
+  end
 end

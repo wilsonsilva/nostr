@@ -5,6 +5,7 @@ module Nostr
     attr_reader public_key: PublicKey
 
     def initialize: (private_key: PrivateKey, public_key: PublicKey) -> void
+    def to_ary: -> [PrivateKey, PublicKey]
 
     private
 
