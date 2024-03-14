@@ -1,0 +1,5 @@
+module Nostr
+  class InvalidSignatureLengthError < SignatureValidationError
+    def initialize: -> void
+  end
+end

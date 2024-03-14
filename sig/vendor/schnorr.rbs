@@ -1,4 +1,6 @@
 # Added only to satisfy the Steep requirements. Not 100% reliable.
 module Schnorr
-  def self.sign: (String message, String private_key, ?String aux_rand) -> untyped
+  def self.sign: (String message, String private_key, ?String aux_rand) -> Signature
+  def self.valid_sig?: (String message, String public_key, String signature) -> bool
+  def self.check_sig!: (String message, String public_key, String signature) -> bool
 end

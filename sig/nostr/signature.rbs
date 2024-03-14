@@ -1,0 +1,14 @@
+module Nostr
+  class Signature < String
+    FORMAT: Regexp
+    LENGTH: int
+
+    def initialize: (String) -> void
+
+    private
+
+    attr_reader hex_value: String
+
+    def validate: (String) -> nil
+  end
+end

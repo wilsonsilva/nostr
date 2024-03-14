@@ -5,17 +5,17 @@ require 'spec_helper'
 RSpec.describe Nostr::Event do
   let(:event) do
     described_class.new(
-      id: '20f31a9b2a0ced48a167add9732ccade1dca5e34b44316e37da4af33bc8946a9',
-      pubkey: 'ccf9fdf3e1466d7c20969c71ec98defcf5f54aee088513e1b73ccb7bd770d460',
-      created_at: 1_230_981_305,
+      id: '499ff6e60cc6b38bd6b94446fb1d61cc18cf19bf324e93dfe84338daeaab3fba',
+      pubkey: Nostr::PublicKey.new('2d7661527d573cc8e84f665fa971dd969ba51e2526df00c149ff8e40a58f9558'),
+      created_at: 1_667_422_587,
       kind: 1,
       tags: [
         %w[e 189df012cfff8a075785b884bd702025f4a7a37710f581c4ac9d33e24b585408],
         %w[p 472f440f29ef996e92a186b8d320ff180c855903882e59d50de1b8bd5669301e]
       ],
       content: 'Your feedback is appreciated, now pay $8',
-      sig: '058613f8d34c053294cc28b7f9e1f8f0e80fd1ac94fb20f2da6ca514e7360b39' \
-           '63d0086171f842ffebf1f7790ce147b4811a15ef3f59c76ec1324b970cc57ffe'
+      sig: 'f418c97b50cc68227e82f4f3a79d79eb2b7a0fa517859c86e1a8fa91e3741b7f' \
+           '06e070c44129227b83fcbe93cecb02a346804a4080ce47685ecad60ab4f5f128'
     )
   end
 
@@ -24,8 +24,8 @@ RSpec.describe Nostr::Event do
       it 'returns true' do
         event1 = described_class.new(
           id: '2a3184512d34077601e992ba3c3215354b21a8c76f85c2c7f66093481854e811',
-          pubkey: '2d7661527d573cc8e84f665fa971dd969ba51e2526df00c149ff8e40a58f9558',
-          created_at: 1_230_981_305,
+          pubkey: Nostr::PublicKey.new('2d7661527d573cc8e84f665fa971dd969ba51e2526df00c149ff8e40a58f9558'),
+          created_at: 1_667_422_587,
           kind: 1,
           tags: [%w[e 189df012cfff8a075785b884bd702025f4a7a37710f581c4ac9d33e24b585408]],
           content: 'Your feedback is appreciated, now pay $8',
@@ -35,8 +35,8 @@ RSpec.describe Nostr::Event do
 
         event2 = described_class.new(
           id: '2a3184512d34077601e992ba3c3215354b21a8c76f85c2c7f66093481854e811',
-          pubkey: '2d7661527d573cc8e84f665fa971dd969ba51e2526df00c149ff8e40a58f9558',
-          created_at: 1_230_981_305,
+          pubkey: Nostr::PublicKey.new('2d7661527d573cc8e84f665fa971dd969ba51e2526df00c149ff8e40a58f9558'),
+          created_at: 1_667_422_587,
           kind: 1,
           tags: [%w[e 189df012cfff8a075785b884bd702025f4a7a37710f581c4ac9d33e24b585408]],
           content: 'Your feedback is appreciated, now pay $8',
@@ -52,8 +52,8 @@ RSpec.describe Nostr::Event do
       it 'returns false' do
         event1 = described_class.new(
           id: '2a3184512d34077601e992ba3c3215354b21a8c76f85c2c7f66093481854e811',
-          pubkey: '2d7661527d573cc8e84f665fa971dd969ba51e2526df00c149ff8e40a58f9558',
-          created_at: 1_230_981_305,
+          pubkey: Nostr::PublicKey.new('2d7661527d573cc8e84f665fa971dd969ba51e2526df00c149ff8e40a58f9558'),
+          created_at: 1_667_422_587,
           kind: 1,
           tags: [%w[e 189df012cfff8a075785b884bd702025f4a7a37710f581c4ac9d33e24b585408]],
           content: 'Your feedback is appreciated, now pay $8',
@@ -63,13 +63,13 @@ RSpec.describe Nostr::Event do
 
         event2 = described_class.new(
           id: '2a3184512d34077601e992ba3c3215354b21a8c76f85c2c7f66093481854e811',
-          pubkey: '2d7661527d573cc8e84f665fa971dd969ba51e2526df00c149ff8e40a58f9558',
-          created_at: 1_230_981_305,
+          pubkey: Nostr::PublicKey.new('2d7661527d573cc8e84f665fa971dd969ba51e2526df00c149ff8e40a58f9558'),
+          created_at: 1_667_422_587,
           kind: 1,
           tags: [%w[e 189df012cfff8a075785b884bd702025f4a7a37710f581c4ac9d33e24b585408]],
           content: 'Your feedback is appreciated, now pay $8',
-          sig: '058613f8d34c053294cc28b7f9e1f8f0e80fd1ac94fb20f2da6ca514e7360b39' \
-               '63d0086171f842ffebf1f7790ce147b4811a15ef3f59c76ec1324b970cc57ffe'
+          sig: 'f418c97b50cc68227e82f4f3a79d79eb2b7a0fa517859c86e1a8fa91e3741b7f' \
+               '06e070c44129227b83fcbe93cecb02a346804a4080ce47685ecad60ab4f5f128'
         )
 
         expect(event1).not_to eq(event2)
@@ -80,17 +80,17 @@ RSpec.describe Nostr::Event do
   describe '.new' do
     it 'creates an instance of an event' do
       event = described_class.new(
-        id: '20f31a9b2a0ced48a167add9732ccade1dca5e34b44316e37da4af33bc8946a9',
-        pubkey: 'ccf9fdf3e1466d7c20969c71ec98defcf5f54aee088513e1b73ccb7bd770d460',
-        created_at: 1_230_981_305,
+        id: '499ff6e60cc6b38bd6b94446fb1d61cc18cf19bf324e93dfe84338daeaab3fba',
+        pubkey: Nostr::PublicKey.new('2d7661527d573cc8e84f665fa971dd969ba51e2526df00c149ff8e40a58f9558'),
+        created_at: 1_667_422_587,
         kind: 1,
         tags: [
           %w[e 189df012cfff8a075785b884bd702025f4a7a37710f581c4ac9d33e24b585408],
           %w[p 472f440f29ef996e92a186b8d320ff180c855903882e59d50de1b8bd5669301e]
         ],
         content: 'Your feedback is appreciated, now pay $8',
-        sig: '058613f8d34c053294cc28b7f9e1f8f0e80fd1ac94fb20f2da6ca514e7360b39' \
-             '63d0086171f842ffebf1f7790ce147b4811a15ef3f59c76ec1324b970cc57ffe'
+        sig: 'f418c97b50cc68227e82f4f3a79d79eb2b7a0fa517859c86e1a8fa91e3741b7f' \
+             '06e070c44129227b83fcbe93cecb02a346804a4080ce47685ecad60ab4f5f128'
       )
 
       expect(event).to be_an_instance_of(described_class)
@@ -100,7 +100,7 @@ RSpec.describe Nostr::Event do
   describe '#add_event_reference' do
     let(:event) do
       described_class.new(
-        pubkey: 'ccf9fdf3e1466d7c20969c71ec98defcf5f54aee088513e1b73ccb7bd770d460',
+        pubkey: Nostr::PublicKey.new('2d7661527d573cc8e84f665fa971dd969ba51e2526df00c149ff8e40a58f9558'),
         kind: Nostr::EventKind::TEXT_NOTE,
         tags: [
           %w[p 472f440f29ef996e92a186b8d320ff180c855903882e59d50de1b8bd5669301e]
@@ -124,7 +124,7 @@ RSpec.describe Nostr::Event do
   describe '#add_pubkey_reference' do
     let(:event) do
       described_class.new(
-        pubkey: 'ccf9fdf3e1466d7c20969c71ec98defcf5f54aee088513e1b73ccb7bd770d460',
+        pubkey: Nostr::PublicKey.new('2d7661527d573cc8e84f665fa971dd969ba51e2526df00c149ff8e40a58f9558'),
         kind: Nostr::EventKind::TEXT_NOTE,
         tags: [
           %w[e 189df012cfff8a075785b884bd702025f4a7a37710f581c4ac9d33e24b585408]
@@ -153,7 +153,7 @@ RSpec.describe Nostr::Event do
 
   describe '#created_at' do
     it 'exposes the event creation date' do
-      expect(event.created_at).to eq(1_230_981_305)
+      expect(event.created_at).to eq(1_667_422_587)
     end
   end
 
@@ -165,13 +165,13 @@ RSpec.describe Nostr::Event do
 
   describe '#id' do
     it 'exposes the event id' do
-      expect(event.id).to eq('20f31a9b2a0ced48a167add9732ccade1dca5e34b44316e37da4af33bc8946a9')
+      expect(event.id).to eq('499ff6e60cc6b38bd6b94446fb1d61cc18cf19bf324e93dfe84338daeaab3fba')
     end
   end
 
   describe '#id=' do
     it 'sets the event id' do
-      new_id = '20f31a9b2a0ced48a167add9732ccade1dca5e34b44316e37da4af33bc8946a9'
+      new_id = '499ff6e60cc6b38bd6b94446fb1d61cc18cf19bf324e93dfe84338daeaab3fba'
 
       event.id = new_id
       expect(event.id).to eq(new_id)
@@ -180,7 +180,7 @@ RSpec.describe Nostr::Event do
 
   describe '#pubkey' do
     it 'exposes the event pubkey' do
-      expect(event.pubkey).to eq('ccf9fdf3e1466d7c20969c71ec98defcf5f54aee088513e1b73ccb7bd770d460')
+      expect(event.pubkey).to eq('2d7661527d573cc8e84f665fa971dd969ba51e2526df00c149ff8e40a58f9558')
     end
   end
 
@@ -191,8 +191,8 @@ RSpec.describe Nostr::Event do
       expect(serialized_event).to eq(
         [
           0,
-          'ccf9fdf3e1466d7c20969c71ec98defcf5f54aee088513e1b73ccb7bd770d460',
-          1_230_981_305,
+          Nostr::PublicKey.new('2d7661527d573cc8e84f665fa971dd969ba51e2526df00c149ff8e40a58f9558'),
+          1_667_422_587,
           1,
           [
             %w[e 189df012cfff8a075785b884bd702025f4a7a37710f581c4ac9d33e24b585408],
@@ -207,16 +207,16 @@ RSpec.describe Nostr::Event do
   describe '#sig' do
     it 'exposes the event signature' do
       expect(event.sig).to eq(
-        '058613f8d34c053294cc28b7f9e1f8f0e80fd1ac94fb20f2da6ca514e7360b39' \
-        '63d0086171f842ffebf1f7790ce147b4811a15ef3f59c76ec1324b970cc57ffe'
+        'f418c97b50cc68227e82f4f3a79d79eb2b7a0fa517859c86e1a8fa91e3741b7f' \
+        '06e070c44129227b83fcbe93cecb02a346804a4080ce47685ecad60ab4f5f128'
       )
     end
   end
 
   describe '#sig=' do
     it 'sets the event signature' do
-      new_signature = '058613f8d34c053294cc28b7f9e1f8f0e80fd1ac94fb20f2da6ca514e7360b39' \
-                      '63d0086171f842ffebf1f7790ce147b4811a15ef3f59c76ec1324b970cc57ffe'
+      new_signature = 'f418c97b50cc68227e82f4f3a79d79eb2b7a0fa517859c86e1a8fa91e3741b7f' \
+                      '06e070c44129227b83fcbe93cecb02a346804a4080ce47685ecad60ab4f5f128'
 
       event.sig = new_signature
       expect(event.sig).to eq(new_signature)
@@ -226,7 +226,7 @@ RSpec.describe Nostr::Event do
   describe '#sign' do
     let(:event) do
       described_class.new(
-        pubkey: 'ccf9fdf3e1466d7c20969c71ec98defcf5f54aee088513e1b73ccb7bd770d460',
+        pubkey: Nostr::PublicKey.new('2d7661527d573cc8e84f665fa971dd969ba51e2526df00c149ff8e40a58f9558'),
         kind: Nostr::EventKind::TEXT_NOTE,
         content: 'Your feedback is appreciated, now pay $8'
       )
@@ -262,16 +262,126 @@ RSpec.describe Nostr::Event do
   describe '#to_h' do
     it 'converts the event to a hash' do
       expect(event.to_h).to eq(
-        id: '20f31a9b2a0ced48a167add9732ccade1dca5e34b44316e37da4af33bc8946a9',
-        pubkey: 'ccf9fdf3e1466d7c20969c71ec98defcf5f54aee088513e1b73ccb7bd770d460',
-        created_at: 1_230_981_305,
+        id: '499ff6e60cc6b38bd6b94446fb1d61cc18cf19bf324e93dfe84338daeaab3fba',
+        pubkey: Nostr::PublicKey.new('2d7661527d573cc8e84f665fa971dd969ba51e2526df00c149ff8e40a58f9558'),
+        created_at: 1_667_422_587,
         kind: 1,
         tags: [%w[e 189df012cfff8a075785b884bd702025f4a7a37710f581c4ac9d33e24b585408],
                %w[p 472f440f29ef996e92a186b8d320ff180c855903882e59d50de1b8bd5669301e]],
         content: 'Your feedback is appreciated, now pay $8',
-        sig: '058613f8d34c053294cc28b7f9e1f8f0e80fd1ac94fb20f2da6ca514e7360b39' \
-             '63d0086171f842ffebf1f7790ce147b4811a15ef3f59c76ec1324b970cc57ffe'
+        sig: 'f418c97b50cc68227e82f4f3a79d79eb2b7a0fa517859c86e1a8fa91e3741b7f' \
+             '06e070c44129227b83fcbe93cecb02a346804a4080ce47685ecad60ab4f5f128'
       )
+    end
+  end
+
+  describe '#verify_signature' do
+    context 'when the id is nil' do
+      let(:event) do
+        described_class.new(
+          pubkey: Nostr::PublicKey.new('2d7661527d573cc8e84f665fa971dd969ba51e2526df00c149ff8e40a58f9558'),
+          created_at: 1_667_422_587,
+          kind: 1,
+          tags: [
+            %w[e 189df012cfff8a075785b884bd702025f4a7a37710f581c4ac9d33e24b585408],
+            %w[p 472f440f29ef996e92a186b8d320ff180c855903882e59d50de1b8bd5669301e]
+          ],
+          content: 'Your feedback is appreciated, now pay $8',
+          sig: 'f418c97b50cc68227e82f4f3a79d79eb2b7a0fa517859c86e1a8fa91e3741b7f' \
+               '06e070c44129227b83fcbe93cecb02a346804a4080ce47685ecad60ab4f5f128'
+        )
+      end
+
+      it 'returns false' do
+        expect(event.verify_signature).to be(false)
+      end
+    end
+
+    context 'when the sig is nil' do
+      let(:event) do
+        described_class.new(
+          id: '499ff6e60cc6b38bd6b94446fb1d61cc18cf19bf324e93dfe84338daeaab3fba',
+          pubkey: Nostr::PublicKey.new('2d7661527d573cc8e84f665fa971dd969ba51e2526df00c149ff8e40a58f9558'),
+          created_at: 1_667_422_587,
+          kind: 1,
+          tags: [
+            %w[e 189df012cfff8a075785b884bd702025f4a7a37710f581c4ac9d33e24b585408],
+            %w[p 472f440f29ef996e92a186b8d320ff180c855903882e59d50de1b8bd5669301e]
+          ],
+          content: 'Your feedback is appreciated, now pay $8'
+        )
+      end
+
+      it 'returns false' do
+        event.sig = nil
+        expect(event.verify_signature).to be(false)
+      end
+    end
+
+    context 'when the pubkey is missing' do
+      let(:event) do
+        described_class.new(
+          id: '499ff6e60cc6b38bd6b94446fb1d61cc18cf19bf324e93dfe84338daeaab3fba',
+          pubkey: nil,
+          created_at: 1_667_422_587,
+          kind: 1,
+          tags: [
+            %w[e 189df012cfff8a075785b884bd702025f4a7a37710f581c4ac9d33e24b585408],
+            %w[p 472f440f29ef996e92a186b8d320ff180c855903882e59d50de1b8bd5669301e]
+          ],
+          content: 'Your feedback is appreciated, now pay $8',
+          sig: 'f418c97b50cc68227e82f4f3a79d79eb2b7a0fa517859c86e1a8fa91e3741b7f' \
+               '06e070c44129227b83fcbe93cecb02a346804a4080ce47685ecad60ab4f5f128'
+        )
+      end
+
+      it 'returns false' do
+        expect(event.verify_signature).to be(false)
+      end
+    end
+
+    context 'when the sig is valid' do
+      let(:event) do
+        described_class.new(
+          id: '499ff6e60cc6b38bd6b94446fb1d61cc18cf19bf324e93dfe84338daeaab3fba',
+          pubkey: Nostr::PublicKey.new('2d7661527d573cc8e84f665fa971dd969ba51e2526df00c149ff8e40a58f9558'),
+          created_at: 1_667_422_587,
+          kind: 1,
+          tags: [
+            %w[e 189df012cfff8a075785b884bd702025f4a7a37710f581c4ac9d33e24b585408],
+            %w[p 472f440f29ef996e92a186b8d320ff180c855903882e59d50de1b8bd5669301e]
+          ],
+          content: 'Your feedback is appreciated, now pay $8',
+          sig: 'f418c97b50cc68227e82f4f3a79d79eb2b7a0fa517859c86e1a8fa91e3741b7f' \
+               '06e070c44129227b83fcbe93cecb02a346804a4080ce47685ecad60ab4f5f128'
+        )
+      end
+
+      it 'returns true' do
+        expect(event.verify_signature).to be(true)
+      end
+    end
+
+    context 'when the sig is invalid' do
+      let(:event) do
+        described_class.new(
+          id: '499ff6e60cc6b38bd6b94446fb1d61cc18cf19bf324e93dfe84338daeaab3fba',
+          pubkey: Nostr::PublicKey.new('2d7661527d573cc8e84f665fa971dd969ba51e2526df00c149ff8e40a58f9558'),
+          created_at: 1_667_422_587,
+          kind: 1,
+          tags: [
+            %w[e 189df012cfff8a075785b884bd702025f4a7a37710f581c4ac9d33e24b585408],
+            %w[p 472f440f29ef996e92a186b8d320ff180c855903882e59d50de1b8bd5669301e]
+          ],
+          content: 'Your feedback is appreciated, now pay $8',
+          sig: 'badbadbadbadbadbadbadbadbadbadbadbadbadbadbadbadbadbadbadbadbadb' \
+               'badbadbadbadbadbadbadbadbadbadbadbadbadbadbadbadbadbadbadbadbadb'
+        )
+      end
+
+      it 'returns false' do
+        expect(event.verify_signature).to be(false)
+      end
     end
   end
 end
