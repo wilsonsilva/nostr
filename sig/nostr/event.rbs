@@ -5,7 +5,7 @@ module Nostr
     attr_reader kind: Integer
     attr_reader tags: Array[Array[String]]
     attr_reader content: String
-    attr_accessor id: String?|nil
+    attr_accessor id: String?
     attr_accessor sig: Signature?
 
     def initialize: (
@@ -14,20 +14,20 @@ module Nostr
       content: String,
       ?created_at: Integer,
       ?tags: Array[Array[String]],
-      ?id: String|nil,
+      ?id: String?,
       ?sig: Signature?
     ) -> void
 
     def serialize: -> [Integer, String, Integer, Integer, Array[Array[String]], String]
 
     def to_h: -> {
-      id: String?|nil,
+      id: String?,
       pubkey: String,
       created_at: Integer,
       kind: Integer,
       tags: Array[Array[String]],
       content: String,
-      sig: String?|nil
+      sig: String?
     }
     def ==: (Event other) -> bool
 
