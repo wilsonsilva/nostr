@@ -7,6 +7,9 @@ module Nostr
     def encrypt_text: (PrivateKey, PublicKey, String) -> String
     def decrypt_text: (PrivateKey, PublicKey, String) -> String
     def sign_event: (Event, PrivateKey) -> Event
+    def sign_message: (String, PrivateKey) -> Signature
+    def valid_sig?: (String, PublicKey, Signature) -> bool
+    def check_sig!: (String, PublicKey, Signature) -> bool
 
     private
 

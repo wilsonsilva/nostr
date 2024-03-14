@@ -181,6 +181,34 @@ module Nostr
       crypto.sign_event(self, private_key)
     end
 
+    # Verifies if the signature of the event is valid. A valid signature means that the event was signed by the owner
+    #
+    # @api public
+    #
+    # @example Verifying the signature of an event
+    #   event = Nostr::Event.new(
+    #     id: '90b75b78daf883ae57fbcc414d43faa028560b3211ee58e4ea82bf395bb82042',
+    #     pubkey: Nostr::PublicKey.new('2d7661527d573cc8e84f665fa971dd969ba51e2526df00c149ff8e40a58f9558'),
+    #     created_at: 1667422587,
+    #     kind: Nostr::EventKind::TEXT_NOTE,
+    #     content: 'Your feedback is appreciated, now pay $8',
+    #     sig: '32f18adebe942e19b171c1c7d2fb27ce794dfea4155e289dca7952b43ed1ec39' \
+    #       '1d3dc198ba2761bc6d40c737a6eaf4edcc8963acabd3bfcebd04f16637025bdc'
+    #   )
+    #
+    #   event.verify_signature # => true
+    #
+    # @return [Boolean] Whether the signature is valid or not.
+    #
+    def verify_signature
+      crypto = Crypto.new
+
+      return false if id.nil? || pubkey.nil?
+      return false if sig.nil? # FIXME: See https://github.com/soutaro/steep/issues/1079
+
+      crypto.valid_sig?(id, pubkey, sig)
+    end
+
     # Serializes the event, to obtain a SHA256 digest of it
     #
     # @api public

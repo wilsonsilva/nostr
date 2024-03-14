@@ -1,0 +1,16 @@
+# Added only to satisfy the Steep requirements. Not 100% reliable.
+module Schnorr
+  class InvalidSignatureError < StandardError
+  end
+
+  class Signature
+    attr_reader r: Integer
+    attr_reader s: Integer
+
+    def self.decode: (String string) -> Signature
+
+    def initialize: (Integer r, Integer s) -> void
+    def encode: -> String
+    def ==: (untyped other) -> bool
+  end
+end

@@ -1,0 +1,4 @@
+module Nostr
+  class SignatureValidationError < Error
+  end
+end

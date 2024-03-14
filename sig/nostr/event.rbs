@@ -6,7 +6,7 @@ module Nostr
     attr_reader tags: Array[Array[String]]
     attr_reader content: String
     attr_accessor id: String?|nil
-    attr_accessor sig: String?|nil
+    attr_accessor sig: Signature?
 
     def initialize: (
       pubkey: PublicKey,
@@ -15,7 +15,7 @@ module Nostr
       ?created_at: Integer,
       ?tags: Array[Array[String]],
       ?id: String|nil,
-      ?sig: String|nil
+      ?sig: Signature?
     ) -> void
 
     def serialize: -> [Integer, String, Integer, Integer, Array[Array[String]], String]
@@ -32,6 +32,7 @@ module Nostr
     def ==: (Event other) -> bool
 
     def sign:(PrivateKey) -> Event
+    def verify_signature: -> bool
 
     def add_event_reference: (String) -> Array[Array[String]]
     def add_pubkey_reference: (PublicKey) -> Array[Array[String]]

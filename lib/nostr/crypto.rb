@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Nostr
-  # Performs cryptographic operations on a +Nostr::Event+.
+  # Performs cryptographic operations.
   class Crypto
     # Numeric base of the OpenSSL big number used in an event content's encryption.
     #
@@ -90,15 +90,91 @@ module Nostr
     #
     def sign_event(event, private_key)
       event_digest = hash_event(event)
-
-      hex_private_key = Array(private_key).pack('H*')
-      hex_message     = Array(event_digest).pack('H*')
-      event_signature = Schnorr.sign(hex_message, hex_private_key).encode.unpack1('H*')
+      signature = sign_message(event_digest, private_key)
 
       event.id = event_digest
-      event.sig = event_signature
+      event.sig = signature
 
       event
+    end
+
+    # Signs a message using the Schnorr signature algorithm
+    #
+    # @api public
+    #
+    # @example Signing a message
+    #   crypto = Nostr::Crypto.new
+    #   message = 'Viva la libertad carajo'
+    #   private_key = Nostr::PrivateKey.new('7d1e4219a5e7d8342654c675085bfbdee143f0eb0f0921f5541ef1705a2b407d')
+    #   signature = crypto.sign_message(message, private_key)
+    #   signature # => 'b2115694a576f5bdcebf8c0951a3c7adcfbdb17b11cb9e6d6b7017691138bc6' \
+    #     '38fee642a7bd26f71b313a7057181294198900a9770d1435e43f182acf3d34c26'
+    #
+    # @param [String] message The message to be signed
+    # @param [PrivateKey] private_key The private key used for signing
+    #
+    # @return [Signature] A signature object containing the signature as a 64-byte hexadecimal string.
+    #
+    def sign_message(message, private_key)
+      hex_private_key = Array(private_key).pack('H*')
+      hex_message     = Array(message).pack('H*')
+      hex_signature   = Schnorr.sign(hex_message, hex_private_key).encode.unpack1('H*')
+
+      Signature.new(hex_signature.to_s)
+    end
+
+    # Verifies the given {Signature} and returns true if it is valid
+    #
+    # @api public
+    #
+    # @example Checking a signature
+    #   public_key = Nostr::PublicKey.new('15678d8fbc126fa326fac536acd5a6dcb5ef64b3d939abe31d6830cba6cd26d6')
+    #   private_key = Nostr::PrivateKey.new('7d1e4219a5e7d8342654c675085bfbdee143f0eb0f0921f5541ef1705a2b407d')
+    #   message = 'Viva la libertad carajo'
+    #   crypto = Nostr::Crypto.new
+    #   signature = crypto.sign_message(message, private_key)
+    #   valid = crypto.valid_sig?(message, public_key, signature)
+    #   valid # => true
+    #
+    # @see #check_sig!
+    #
+    # @param [String] message A message to be signed with binary format.
+    # @param [PublicKey] public_key The public key with binary format.
+    # @param [Signature] signature The signature with binary format.
+    #
+    # @return [Boolean] whether signature is valid.
+    #
+    def valid_sig?(message, public_key, signature)
+      signature = Schnorr::Signature.decode([signature].pack('H*'))
+      Schnorr.valid_sig?([message].pack('H*'), [public_key].pack('H*'), signature.encode)
+    end
+
+    # Verifies the given {Signature} and raises an +Schnorr::InvalidSignatureError+ if it is invalid
+    #
+    # @api public
+    #
+    # @example Checking a signature
+    #   public_key = Nostr::PublicKey.new('15678d8fbc126fa326fac536acd5a6dcb5ef64b3d939abe31d6830cba6cd26d6')
+    #   private_key = Nostr::PrivateKey.new('7d1e4219a5e7d8342654c675085bfbdee143f0eb0f0921f5541ef1705a2b407d')
+    #   message = 'Viva la libertad carajo'
+    #   crypto = Nostr::Crypto.new
+    #   signature = crypto.sign_message(message, private_key)
+    #   valid = crypto.valid_sig?(message, public_key, signature)
+    #   valid # => true
+    #
+    # @see #valid_sig?
+    #
+    # @param [String] message A message to be signed with binary format.
+    # @param [PublicKey] public_key The public key with binary format.
+    # @param [Signature] signature The signature with binary format.
+    #
+    # @raise [Schnorr::InvalidSignatureError] if the signature is invalid.
+    #
+    # @return [Boolean] whether signature is valid.
+    #
+    def check_sig!(message, public_key, signature)
+      signature = Schnorr::Signature.decode([signature].pack('H*'))
+      Schnorr.check_sig!([message].pack('H*'), [public_key].pack('H*'), signature.encode)
     end
 
     private

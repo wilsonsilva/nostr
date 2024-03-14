@@ -5,6 +5,62 @@ require 'spec_helper'
 RSpec.describe Nostr::Crypto do
   let(:crypto) { described_class.new }
 
+  describe '#check_sig!' do
+    let(:keypair) do
+      Nostr::KeyPair.new(
+        public_key: Nostr::PublicKey.new('15678d8fbc126fa326fac536acd5a6dcb5ef64b3d939abe31d6830cba6cd26d6'),
+        private_key: Nostr::PrivateKey.new('7d1e4219a5e7d8342654c675085bfbdee143f0eb0f0921f5541ef1705a2b407d')
+      )
+    end
+    let(:message) { 'Your feedback is appreciated, now pay $8' }
+
+    context 'when the signature is valid' do
+      it 'returns true' do
+        signature = crypto.sign_message(message, keypair.private_key)
+
+        expect(crypto.check_sig!(message, keypair.public_key, signature)).to be(true)
+      end
+    end
+
+    context 'when the signature is invalid' do
+      it 'raises an error' do
+        signature = Nostr::Signature.new('badbadbadbadbadbadbadbadbadbadbadbadbadbadbadbadbadbadbadbadbadb' \
+                                         'badbadbadbadbadbadbadbadbadbadbadbadbadbadbadbadbadbadbadbadbadb')
+
+        expect do
+          crypto.check_sig!(message, keypair.public_key, signature)
+        end.to raise_error(Schnorr::InvalidSignatureError, 'signature verification failed.')
+      end
+    end
+  end
+
+  describe '#valid_sig?' do
+    let(:keypair) do
+      Nostr::KeyPair.new(
+        public_key: Nostr::PublicKey.new('15678d8fbc126fa326fac536acd5a6dcb5ef64b3d939abe31d6830cba6cd26d6'),
+        private_key: Nostr::PrivateKey.new('7d1e4219a5e7d8342654c675085bfbdee143f0eb0f0921f5541ef1705a2b407d')
+      )
+    end
+    let(:message) { 'Your feedback is appreciated, now pay $8' }
+
+    context 'when the signature is valid' do
+      it 'returns true' do
+        signature = crypto.sign_message(message, keypair.private_key)
+
+        expect(crypto.valid_sig?(message, keypair.public_key, signature)).to be(true)
+      end
+    end
+
+    context 'when the signature is invalid' do
+      it 'returns false' do
+        signature = Nostr::Signature.new('badbadbadbadbadbadbadbadbadbadbadbadbadbadbadbadbadbadbadbadbadb' \
+                                         'badbadbadbadbadbadbadbadbadbadbadbadbadbadbadbadbadbadbadbadbadb')
+
+        expect(crypto.valid_sig?(message, keypair.public_key, signature)).to be(false)
+      end
+    end
+  end
+
   describe '#sign_event' do
     let(:keypair) do
       Nostr::KeyPair.new(
@@ -28,6 +84,19 @@ RSpec.describe Nostr::Crypto do
         expect(signed_event.id.length).to eq(64)
         expect(signed_event.sig.length).to eq(128)
       end
+    end
+  end
+
+  describe '#sign_message' do
+    let(:private_key) { Nostr::PrivateKey.new('7d1e4219a5e7d8342654c675085bfbdee143f0eb0f0921f5541ef1705a2b407d') }
+    let(:message) { 'Your feedback is appreciated, now pay $8' }
+
+    it 'signs a message' do
+      signature = crypto.sign_message(message, private_key)
+      hex_signature = '0fa6d8e26f44ddad9eca5be2b8a25d09338c1767f8bfce384046c8eb771d1120e4bda5ca49' \
+                      '27e74837f912d4810945af6abf8d38139c1347f2d71ba8c52b175b'
+
+      expect(signature).to eq(Nostr::Signature.new(hex_signature))
     end
   end
 
