@@ -39,6 +39,4 @@ features:
   - title: Fully typed
     details: All code is typed with <a href="https://rubygems.org/gems/rbs" target="_blank">RBS</a> with the help of <a href="https://rubygems.org/gems/typeprof" target="_blank">TypeProf</a>. Type correctness is enforced by <a href="https://rubygems.org/gems/steep" target="_blank">Steep</a>.
     icon: ✅
-
 ---
-
