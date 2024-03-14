@@ -1,6 +1,7 @@
 # Nostr
 
 [![Gem Version](https://badge.fury.io/rb/nostr.svg)](https://badge.fury.io/rb/nostr)
+![Build](https://github.com/wilsonsilva/nostr/actions/workflows/main.yml/badge.svg)
 [![Maintainability](https://api.codeclimate.com/v1/badges/c7633eb2c89eb95ee7f2/maintainability)](https://codeclimate.com/github/wilsonsilva/nostr/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/c7633eb2c89eb95ee7f2/test_coverage)](https://codeclimate.com/github/wilsonsilva/nostr/test_coverage)
 
