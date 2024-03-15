@@ -118,6 +118,9 @@ end
 client.on :close do |code, reason|
   # You may attempt to reconnect to the relay here
 end
+
+# This line keeps the background client from exiting immediately.
+gets
 ```
 
 ## 📚 Documentation

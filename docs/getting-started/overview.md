@@ -165,6 +165,9 @@ end
 client.on :close do |code, reason|
   # You may attempt to reconnect to the relay here
 end
+
+# This line keeps the background client from exiting immediately.
+gets
 ```
 
 Beyond what's covered here, the Nostr protocol and this gem boast a wealth of additional functionalities. For an
