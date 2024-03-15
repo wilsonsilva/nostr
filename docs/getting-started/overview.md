@@ -35,6 +35,7 @@ classDiagram
         serialize()
         to_h()
         sign(private_key)
+        verify_signature()
     }
     class Subscription {
         id
