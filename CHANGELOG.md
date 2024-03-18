@@ -27,13 +27,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Updated the gem `rspec-rubocop` to version `2.27` (was `2.25`)
 - Updated the gem `rubocop` to version `1.62` (was `1.57`)
 
-## Fixed
+### Fixed
 
 - Fixed a typo in the README (`generate_keypair` -> `generate_key_pair`)
 - Fixed a typo in the YARD documentation of `Nostr::Key#initialize` (`ValidationError` -> `KeyValidationError`)
-
-### Fixed
-
 - Fixed YARD example rendering issues in `InvalidKeyFormatError#initialize`, `InvalidKeyLengthError#initialize`,
 `InvalidKeyTypeError#initialize`, `Event#initialize`, `EncryptedDirectMessage#initialize` and `Filter#to_h`
 
