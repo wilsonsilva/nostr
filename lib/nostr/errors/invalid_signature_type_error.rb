@@ -11,6 +11,6 @@ module Nostr
     # @example
     #   InvalidSignatureTypeError.new
     #
-    def initialize = super('Invalid signature type')
+    def initialize = super('Invalid signature type. It must be a string with lowercase hexadecimal characters.')
   end
 end

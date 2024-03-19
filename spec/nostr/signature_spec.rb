@@ -15,7 +15,7 @@ RSpec.describe Nostr::Signature do
       it 'raises an InvalidSignatureTypeError' do
         expect { described_class.new(1234) }.to raise_error(
           Nostr::InvalidSignatureTypeError,
-          'Invalid signature type'
+          'Invalid signature type. It must be a string with lowercase hexadecimal characters.'
         )
       end
     end
