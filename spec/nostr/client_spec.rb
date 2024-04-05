@@ -27,8 +27,8 @@ RSpec.describe Nostr::Client do
   after  { stop }
 
   describe '.new' do
-    it 'creates an instance of a relay' do
       client = described_class.new
+    it 'creates an instance of a client' do
 
       expect(client).to be_an_instance_of(described_class)
     end
