@@ -36,7 +36,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'ecdsa', '~> 1.2'
   spec.add_dependency 'event_emitter', '~> 0.2'
   spec.add_dependency 'faye-websocket', '~> 0.11'
-  spec.add_dependency 'json', '~> 2.6'
+  spec.add_dependency 'json', '~> 2.7'
 
   spec.add_development_dependency 'bundler-audit', '~> 0.9'
   spec.add_development_dependency 'dotenv', '~> 3.1'
@@ -54,7 +54,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rspec', '~> 3.13'
   spec.add_development_dependency 'rubocop', '~> 1.62'
   spec.add_development_dependency 'rubocop-rake', '~> 0.6'
-  spec.add_development_dependency 'rubocop-rspec', '2.27'
+  spec.add_development_dependency 'rubocop-rspec', '2.29'
   spec.add_development_dependency 'simplecov', '= 0.17'
   spec.add_development_dependency 'simplecov-console', '~> 0.9'
   spec.add_development_dependency 'steep', '~> 1.6'
