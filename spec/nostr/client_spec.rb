@@ -52,16 +52,16 @@ RSpec.describe Nostr::Client do
   describe '#on' do
     context 'when the connection is opened' do
       it 'fires the :connect event' do
-        connect_event_fired = false
+        connected_relay = nil
 
-        client.on :connect do
-          connect_event_fired = true
+        client.on :connect do |relay|
+          connected_relay = relay
         end
 
         client.connect(relay)
         sleep 0.02
 
-        expect(connect_event_fired).to be(true)
+        expect(connected_relay).to eq(relay)
       end
     end
 

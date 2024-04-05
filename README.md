@@ -80,7 +80,7 @@ relay = Nostr::Relay.new(url: 'wss://nostr.wine', name: 'Wine')
 client.connect(relay)
 
 # Listen asynchronously for the connect event
-client.on :connect do
+client.on :connect do |relay|
   # Send the event to the Relay
   client.publish(text_note_event)
 

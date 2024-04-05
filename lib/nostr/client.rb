@@ -40,11 +40,11 @@ module Nostr
     #
     def connect(relay)
       execute_within_an_em_thread do
-        client = Faye::WebSocket::Client.new(relay.url, [], { tls: { verify_peer: false } })
-        parent_to_child_channel.subscribe { |msg| client.send(msg) }
+        client = build_websocket_client(relay.url)
+        parent_to_child_channel.subscribe { |msg| client.send(msg) && emit(:send, msg) }
 
         client.on :open do
-          child_to_parent_channel.push(type: :open)
+          child_to_parent_channel.push(type: :open, relay:)
         end
 
         client.on :message do |event|
@@ -167,11 +167,21 @@ module Nostr
       @child_to_parent_channel = EventMachine::Channel.new
 
       child_to_parent_channel.subscribe do |msg|
-        emit :connect                           if msg[:type] == :open
+        emit :connect, msg[:relay]              if msg[:type] == :open
         emit :message, msg[:data]               if msg[:type] == :message
         emit :error,   msg[:message]            if msg[:type] == :error
         emit :close,   msg[:code], msg[:reason] if msg[:type] == :close
       end
+    end
+
+    # Builds a websocket client
+    #
+    # @api private
+    #
+    # @return [Faye::WebSocket::Client]
+    #
+    def build_websocket_client(relay_url)
+      Faye::WebSocket::Client.new(relay_url, [], { tls: { verify_peer: false } })
     end
   end
 end

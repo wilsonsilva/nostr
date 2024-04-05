@@ -28,7 +28,7 @@ The `:connect` event is fired when a connection with a WebSocket is opened. You 
 client = Nostr::Client.new
 relay = Nostr::Relay.new(url: 'wss://relay.damus.io', name: 'Damus')
 
-client.on :connect do
+client.on :connect do |relay|
   # When this block executes, you're connected to the relay
 end
 
