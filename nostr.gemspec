@@ -57,7 +57,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rubocop-rspec', '2.29'
   spec.add_development_dependency 'simplecov', '= 0.17'
   spec.add_development_dependency 'simplecov-console', '~> 0.9'
-  spec.add_development_dependency 'steep', '~> 1.6'
+  spec.add_development_dependency 'steep', '~> 1.7.dev3'
   spec.add_development_dependency 'typeprof', '~> 0.21'
   spec.add_development_dependency 'yard', '~> 0.9'
   spec.add_development_dependency 'yard-junk', '~> 0.0.9'

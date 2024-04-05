@@ -203,8 +203,7 @@ module Nostr
     def verify_signature
       crypto = Crypto.new
 
-      return false if id.nil? || pubkey.nil?
-      return false if sig.nil? # FIXME: See https://github.com/soutaro/steep/issues/1079
+      return false if id.nil? || pubkey.nil? || sig.nil?
 
       crypto.valid_sig?(id, pubkey, sig)
     end
