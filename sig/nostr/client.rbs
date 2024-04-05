@@ -16,5 +16,6 @@ module Nostr
 
     def execute_within_an_em_thread: { -> void } -> Thread
     def initialize_channels: -> void
+    def build_websocket_client: (String relay_name) -> Faye::WebSocket::Client
   end
 end
