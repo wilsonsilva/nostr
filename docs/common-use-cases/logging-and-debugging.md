@@ -45,6 +45,8 @@ log messages in a simple, readable format without any ANSI escape codes.
 To use the `PlainLogger`, pass it as the `logger` option when creating the client instance:
 
 ```ruby
+require 'nostr/client/plain_logger'
+
 client = Nostr::Client.new(logger: Nostr::Client::PlainLogger.new)
 ```
 
