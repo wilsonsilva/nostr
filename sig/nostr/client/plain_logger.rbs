@@ -1,0 +1,6 @@
+module Nostr
+  class Client
+    class PlainLogger < Logger
+    end
+  end
+end

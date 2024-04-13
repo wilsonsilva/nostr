@@ -78,6 +78,7 @@ export default defineConfig(withMermaid({
         text: 'Common use cases',
         collapsed: false,
         items: [
+          { text: 'Logging and debugging', link: '/common-use-cases/logging-and-debugging' },
           { text: 'Bech32 enc/decoding (NIP-19)', link: '/common-use-cases/bech32-encoding-and-decoding-(NIP-19)' },
           { text: 'Signing/verifying messages', link: '/common-use-cases/signing-and-verifying-messages' },
           { text: 'Signing/verifying events', link: '/common-use-cases/signing-and-verifying-events' },

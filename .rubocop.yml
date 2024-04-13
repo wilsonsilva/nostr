@@ -8,6 +8,8 @@ AllCops:
   TargetRubyVersion: 3.3
   DisplayCopNames: true
   NewCops: enable
+  Exclude:
+    - docs/**/*
 
 # ----------------------- Gemspec -----------------------
 

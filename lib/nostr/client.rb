@@ -18,11 +18,19 @@ module Nostr
     # @api public
     #
     # @example Instantiating a client that logs all the events it sends and receives
-    #   client = Nostr::Client.new(debug: true)
+    #   client = Nostr::Client.new
     #
-    def initialize
+    # @example Instantiating a client with no logging
+    #   client = Nostr::Client.new(logger: nil)
+    #
+    # @example Instantiating a client with your own logger
+    #   client = Nostr::Client.new(logger: YourLogger.new)
+    #
+    def initialize(logger: ColorLogger.new)
       @subscriptions = {}
+      @logger = logger
 
+      logger&.attach_to(self)
       initialize_channels
     end
 
@@ -121,6 +129,14 @@ module Nostr
     end
 
     private
+
+    # The logger that prints all the events that the client sends and receives
+    #
+    # @api private
+    #
+    # @return [ClientLogger]
+    #
+    attr_reader :logger
 
     # The subscriptions that the client has created
     #

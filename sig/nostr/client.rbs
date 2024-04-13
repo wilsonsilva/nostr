@@ -10,6 +10,7 @@ module Nostr
 
     private
 
+    attr_reader logger: Logger
     attr_reader subscriptions: Hash[String, Subscription]
     attr_reader parent_to_child_channel: EventMachine::Channel
     attr_reader child_to_parent_channel: EventMachine::Channel

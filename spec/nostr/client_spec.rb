@@ -17,7 +17,7 @@ RSpec.describe Nostr::Client do
     @echo_server.stop
   end
 
-  let(:client) { described_class.new }
+  let(:client) { described_class.new(logger: nil) }
   let(:relay)  { Nostr::Relay.new(url: plain_text_url, name: 'localhost') }
 
   let(:port)           { 4180 }
@@ -27,8 +27,8 @@ RSpec.describe Nostr::Client do
   after  { stop }
 
   describe '.new' do
-      client = described_class.new
     it 'creates an instance of a client' do
+      client = described_class.new(logger: nil)
 
       expect(client).to be_an_instance_of(described_class)
     end
@@ -134,7 +134,7 @@ RSpec.describe Nostr::Client do
       it 'sends a REQ message to the relay, asking for all events and returns a subscription with the same id' do
         id = '16605b59b539f6e86762f28fb57db2fd'
 
-        client = described_class.new
+        client = described_class.new(logger: nil)
 
         sent_message = nil
         subscription = nil
@@ -164,7 +164,7 @@ RSpec.describe Nostr::Client do
         allow(SecureRandom).to receive(:hex).and_return('16605b59b539f6e86762f28fb57db2fd')
         filter = Nostr::Filter.new(since: 1_230_981_305)
 
-        client = described_class.new
+        client = described_class.new(logger: nil)
 
         sent_message = nil
         subscription = nil
@@ -194,7 +194,7 @@ RSpec.describe Nostr::Client do
         id = '16605b59b539f6e86762f28fb57db2fd'
         filter = Nostr::Filter.new(since: 1_230_981_305)
 
-        client = described_class.new
+        client = described_class.new(logger: nil)
 
         sent_message = nil
         subscription = nil
@@ -223,7 +223,7 @@ RSpec.describe Nostr::Client do
       it 'sends a REQ message to the relay, asking for all events and returns a subscription with a random id' do
         allow(SecureRandom).to receive(:hex).and_return('16605b59b539f6e86762f28fb57db2fd')
 
-        client = described_class.new
+        client = described_class.new(logger: nil)
 
         sent_message = nil
         subscription = nil
@@ -253,7 +253,7 @@ RSpec.describe Nostr::Client do
     it 'sends a CLOSE message to the relay, asking it to stop a subscription' do
       subscription_id = '16605b59b539f6e86762f28fb57db2fd'
 
-      client = described_class.new
+      client = described_class.new(logger: nil)
 
       sent_message = nil
 
@@ -277,7 +277,7 @@ RSpec.describe Nostr::Client do
   describe '#publish' do
     it 'sends a message to the relay' do
       relay = Nostr::Relay.new(url: plain_text_url, name: 'localhost')
-      client = described_class.new
+      client = described_class.new(logger: nil)
       event = Nostr::Event.new(
         id: '2a3184512d34077601e992ba3c3215354b21a8c76f85c2c7f66093481854e811',
         pubkey: '2d7661527d573cc8e84f665fa971dd969ba51e2526df00c149ff8e40a58f9558',
