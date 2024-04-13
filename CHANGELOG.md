@@ -4,6 +4,36 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.1.1/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [0.7.0] 2024-04-13
+
+### Added
+
+- Added the `Nostr::Client::Logger` class to log connection events, messages sent and received, errors, and connection
+closures.
+- Added the `Nostr::Client::ColorLogger` class to log events in color using ANSI escape codes.
+- Added the `Nostr::Client::PlainLogger` class to log events without color coding.
+- Added Architecture Decision Records (ADRs) to document the decision process for logging functionality.
+- Added a new common use case document for logging and debugging.
+
+### Changed
+
+- Updated the `Nostr::Client` class to use the `ColorLogger` by default for logging client interactions with relays.
+- Updated the `Nostr::Client#connect` method to emit a `:send` event when sending a message.
+- Updated the `Nostr::Client#on` method to pass the `relay` parameter to the `:connect` event handler.
+- Updated bun to version `1.1.3` (was `1.0.30`).
+- Updated the gem `json` to version `2.7` (was `2.6`).
+- Updated the gem `mermaid` to version `10.9` (was `10.6`).
+- Updated the gem `rubocop-rspec` to version `2.29` (was `2.27`).
+- Updated the gem `steep` to version `1.7.dev3` (was `1.6`).
+- Updated the gem `vitepress` to version `1.1` (was `1.0.0-rc.25`).
+- Updated the gem `vitepress-plugin-mermaid` to version `2.0.16` (was `2.0.15`).
+- Updated the error message in `Nostr::InvalidSignatureTypeError` to provide more detail.
+
+### Fixed
+
+Fixed a type-checking issue in `Nostr::Event#verify_signature` by removing a workaround after the steep gem author,
+[@soutaro](https://github.com/soutaro) resolved [the problem I reported](https://github.com/soutaro/steep/issues/1079).
+
 ## [0.6.0] 2024-03-15
 
 ### Added
@@ -112,6 +142,7 @@ principles of immutability and was a major source of internal complexity as I ne
 
 - Initial release
 
+[0.7.0]: https://github.com/wilsonsilva/nostr/compare/v0.6.0...v0.7.0
 [0.6.0]: https://github.com/wilsonsilva/nostr/compare/v0.5.0...v0.6.0
 [0.5.0]: https://github.com/wilsonsilva/nostr/compare/v0.4.0...v0.5.0
 [0.4.0]: https://github.com/wilsonsilva/nostr/compare/v0.3.0...v0.4.0
