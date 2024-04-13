@@ -31,7 +31,7 @@ closures.
 
 ### Fixed
 
-Fixed a type-checking issue in `Nostr::Event#verify_signature` by removing a workaround after the steep gem author,
+- Fixed a type-checking issue in `Nostr::Event#verify_signature` by removing a workaround after the steep gem author,
 [@soutaro](https://github.com/soutaro) resolved [the problem I reported](https://github.com/soutaro/steep/issues/1079).
 
 ## [0.6.0] 2024-03-15
