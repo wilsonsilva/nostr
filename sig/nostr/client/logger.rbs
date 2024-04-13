@@ -1,0 +1,12 @@
+module Nostr
+  class Client
+    class Logger
+      def attach_to: (Client client) -> void
+      def on_connect: (Relay relay) -> void
+      def on_message: (String message) -> void
+      def on_send: (String message) -> void
+      def on_error: (String message) -> void
+      def on_close: (String code, String reason) -> void
+    end
+  end
+end
