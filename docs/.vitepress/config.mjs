@@ -8,7 +8,15 @@ export default defineConfig(withMermaid({
   description: "Documentation of the Nostr Ruby gem",
   // https://vitepress.dev/reference/site-config#head
   head: [
-    ['link', { rel: 'icon', href: '/favicon.ico' }]
+    ['link', { rel: 'icon', href: '/favicon.ico' }],
+    [
+      'script',
+      {
+        defer: true,
+        'data-domain': 'nostr-ruby.com',
+        src: 'https://plausible.io/js/script.js'
+      }
+    ]
   ],
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-last-updated
