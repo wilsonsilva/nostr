@@ -40,5 +40,17 @@ module Nostr
     # @return [Integer]
     #
     ENCRYPTED_DIRECT_MESSAGE = 4
+
+    # A special event with kind 9374. See NIP-57.
+    #
+    # @return [Integer]
+    #
+    ZAP_REQUEST = 9734
+
+    # A special event with kind 9375. See NIP-57.
+    #
+    # @return [Integer]
+    #
+    ZAP_RECEIPT = 9735
   end
 end
