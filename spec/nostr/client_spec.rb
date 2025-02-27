@@ -3,9 +3,6 @@
 require 'spec_helper'
 
 # This test suite does not use let blocks because they don't work with EventMachine.
-#
-# EventMachine is a pain to work with, hence the use of sleep statements and instance variables.
-# I'll come back to fix this once I'm more familiar with it.
 
 RSpec.describe Nostr::Client do
   def server(port)
@@ -43,7 +40,8 @@ RSpec.describe Nostr::Client do
       end
 
       client.connect(relay)
-      sleep 0.02
+
+      wait_for { connected != false }
 
       expect(connected).to be(true)
     end
@@ -59,7 +57,8 @@ RSpec.describe Nostr::Client do
         end
 
         client.connect(relay)
-        sleep 0.02
+
+        wait_for { !connected_relay.nil? }
 
         expect(connected_relay).to eq(relay)
       end
@@ -68,6 +67,11 @@ RSpec.describe Nostr::Client do
     context 'when the client receives a message' do
       it 'fires the :message event' do
         received_message = nil
+        echo_server = @echo_server
+
+        client.on :connect do
+          echo_server.send('hello')
+        end
 
         client.on :message do |_message|
           received_message = 'hello'
@@ -75,11 +79,7 @@ RSpec.describe Nostr::Client do
 
         client.connect(relay)
 
-        sleep 0.1
-
-        @echo_server.send('hello')
-
-        sleep 0.1
+        wait_for { !received_message.nil? }
 
         expect(received_message).to eq('hello')
       end
@@ -97,7 +97,7 @@ RSpec.describe Nostr::Client do
 
         client.connect(relay)
 
-        sleep 0.1
+        wait_for { !connection_error_event.nil? }
 
         expect(connection_error_event).to eq('Network error: musk: musk is not a valid WebSocket URL')
       end
@@ -105,8 +105,13 @@ RSpec.describe Nostr::Client do
 
     context 'when the connection is closed' do
       it 'fires the :close event' do
+        echo_server = @echo_server
         connection_closed_code = nil
         connection_closed_reason = nil
+
+        client.on :connect do
+          echo_server.close(1000, 'We are done')
+        end
 
         client.on :close do |code, reason|
           connection_closed_code = code
@@ -115,11 +120,7 @@ RSpec.describe Nostr::Client do
 
         client.connect(relay)
 
-        sleep 0.1
-
-        @echo_server.close(1000, 'We are done')
-
-        sleep 0.1
+        wait_for { !connection_closed_reason.nil? }
 
         aggregate_failures do
           expect(connection_closed_code).to eq(1000)
@@ -150,11 +151,11 @@ RSpec.describe Nostr::Client do
         relay = Nostr::Relay.new(url: plain_text_url, name: 'localhost')
         client.connect(relay)
 
-        sleep 0.01
+        wait_for { !sent_message.nil? }
 
         aggregate_failures do
           expect(sent_message).to eq('["REQ","16605b59b539f6e86762f28fb57db2fd",{}]')
-          expect(subscription).to eq(Nostr::Subscription.new(id:, filter: nil))
+          expect(subscription).to eq(Nostr::Subscription.new(id: '16605b59b539f6e86762f28fb57db2fd', filter: nil))
         end
       end
     end
@@ -180,7 +181,7 @@ RSpec.describe Nostr::Client do
         relay = Nostr::Relay.new(url: plain_text_url, name: 'localhost')
         client.connect(relay)
 
-        sleep 0.01
+        wait_for { !sent_message.nil? }
 
         aggregate_failures do
           expect(sent_message).to eq('["REQ","16605b59b539f6e86762f28fb57db2fd",{"since":1230981305}]')
@@ -210,7 +211,7 @@ RSpec.describe Nostr::Client do
         relay = Nostr::Relay.new(url: plain_text_url, name: 'localhost')
         client.connect(relay)
 
-        sleep 0.01
+        wait_for { !sent_message.nil? }
 
         aggregate_failures do
           expect(sent_message).to eq('["REQ","16605b59b539f6e86762f28fb57db2fd",{"since":1230981305}]')
@@ -239,7 +240,7 @@ RSpec.describe Nostr::Client do
         relay = Nostr::Relay.new(url: plain_text_url, name: 'localhost')
         client.connect(relay)
 
-        sleep 0.01
+        wait_for { !sent_message.nil? }
 
         aggregate_failures do
           expect(sent_message).to eq('["REQ","16605b59b539f6e86762f28fb57db2fd",{}]')
@@ -268,7 +269,7 @@ RSpec.describe Nostr::Client do
       relay = Nostr::Relay.new(url: plain_text_url, name: 'localhost')
       client.connect(relay)
 
-      sleep 0.01
+      wait_for { !sent_message.nil? }
 
       expect(sent_message).to eq(['CLOSE', { subscription_id: }].to_json)
     end
@@ -301,9 +302,15 @@ RSpec.describe Nostr::Client do
 
       client.connect(relay)
 
-      sleep 0.01
+      wait_for { !received_message.nil? }
 
       expect(received_message).to eq(['EVENT', event.to_h].to_json)
     end
   end
+end
+
+def wait_for(timeout: 1, &block)
+  start_time = Time.now
+  sleep(0.001) until block.call || Time.now - start_time > timeout
+  raise 'Condition not met within timeout' unless block.call
 end
