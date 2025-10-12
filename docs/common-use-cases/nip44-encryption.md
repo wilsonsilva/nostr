@@ -5,6 +5,7 @@ NIP-44 is a modern, versioned encryption scheme for Nostr that provides authenti
 ## Overview
 
 NIP-44 version 2 uses:
+
 - **ECDH** (Elliptic Curve Diffie-Hellman) on secp256k1 for key agreement
 - **HKDF** (HMAC-based Key Derivation Function) with SHA-256 for key derivation
 - **ChaCha20** for encryption
@@ -16,12 +17,14 @@ This provides authenticated encryption, protecting against tampering and ensurin
 ## Why NIP-44 over NIP-04?
 
 **NIP-04** (legacy):
+
 - Uses unauthenticated AES-256-CBC encryption
 - No protection against tampering
 - Known security vulnerabilities
 - Output format: `base64_ciphertext?iv=base64_iv`
 
 **NIP-44** (recommended):
+
 - Uses authenticated encryption (ChaCha20 + HMAC-SHA256)
 - Protects against tampering with MAC verification
 - Audited implementation (Cure53, December 2023)
@@ -114,7 +117,7 @@ If you need to handle both NIP-04 and NIP-44 encrypted content:
 ```ruby
 def decrypt_content(private_key, public_key, encrypted_content)
   crypto = Nostr::Crypto.new
-  
+
   if encrypted_content.include?('?iv=')
     # NIP-04 format
     crypto.decrypt_text(private_key, public_key, encrypted_content)
