@@ -156,4 +156,59 @@ RSpec.describe Nostr::Crypto do
       end
     end
   end
+
+  describe '#encrypt_nip44 and #decrypt_nip44' do
+    let(:sender_keypair) do
+      Nostr::KeyPair.new(
+        public_key: Nostr::PublicKey.new('8a9d69c56e3c691bec8f9565e4dcbe38ae1d88fffeec3ce66b9f47558a3aa8ca'),
+        private_key: Nostr::PrivateKey.new('3185a47e3802f956ca5a2b4ea606c1d51c7610f239617e8f0f218d55bdf2b757')
+      )
+    end
+
+    let(:recipient_keypair) do
+      Nostr::KeyPair.new(
+        public_key: Nostr::PublicKey.new('6c31422248998e300a1a457167565da7d15d0da96651296ee2791c29c11b6aa0'),
+        private_key: Nostr::PrivateKey.new('22cea01c33eccf30fdd54cb6728f814f6de00c778aafd721e017f4582545f9cf')
+      )
+    end
+
+    it 'encrypts and decrypts text using NIP-44' do
+      plain_text = 'Hello NIP-44 World!'
+      
+      encrypted_text = crypto.encrypt_nip44(sender_keypair.private_key, recipient_keypair.public_key, plain_text)
+      decrypted_text = crypto.decrypt_nip44(recipient_keypair.private_key, sender_keypair.public_key, encrypted_text)
+
+      expect(decrypted_text).to eq(plain_text)
+    end
+
+    it 'produces different output than NIP-04' do
+      plain_text = 'Same message'
+      
+      nip04_encrypted = crypto.encrypt_text(sender_keypair.private_key, recipient_keypair.public_key, plain_text)
+      nip44_encrypted = crypto.encrypt_nip44(sender_keypair.private_key, recipient_keypair.public_key, plain_text)
+
+      # NIP-44 format is different from NIP-04
+      expect(nip44_encrypted).not_to eq(nip04_encrypted)
+      expect(nip44_encrypted).not_to include('?iv=') # NIP-04 format
+      
+      # But decryption works with correct method
+      expect(crypto.decrypt_text(recipient_keypair.private_key, sender_keypair.public_key, nip04_encrypted)).to eq(plain_text)
+      expect(crypto.decrypt_nip44(recipient_keypair.private_key, sender_keypair.public_key, nip44_encrypted)).to eq(plain_text)
+    end
+
+    it 'handles various message lengths' do
+      [
+        'a',
+        'short message',
+        'x' * 100,
+        'x' * 1000,
+        'emoji 🎉🎊',
+        "multi\nline\ntext"
+      ].each do |plain_text|
+        encrypted = crypto.encrypt_nip44(sender_keypair.private_key, recipient_keypair.public_key, plain_text)
+        decrypted = crypto.decrypt_nip44(recipient_keypair.private_key, sender_keypair.public_key, encrypted)
+        expect(decrypted).to eq(plain_text)
+      end
+    end
+  end
 end
