@@ -99,7 +99,15 @@ module Nostr
       raise ArgumentError, 'unknown version' if plen.zero? || payload[0] == '#'
       raise ArgumentError, 'invalid payload size' if plen < MIN_BASE64_SIZE || plen > MAX_BASE64_SIZE
 
-      data = Base64.strict_decode64(payload)
+      # Add padding if needed for interoperability with implementations that omit it
+      # NIP-44 uses standard base64 (not base64url), so + and / are valid, - and _ are not
+      padded_payload = case payload.length % 4
+                       when 2 then payload + '=='
+                       when 3 then payload + '='
+                       else payload
+                       end
+
+      data = Base64.strict_decode64(padded_payload)
       dlen = data.length
 
       raise ArgumentError, 'invalid data size' if dlen < MIN_DECODED_SIZE || dlen > MAX_DECODED_SIZE
@@ -248,8 +256,9 @@ module Nostr
   # Pad the plaintext
   padded = pad(plaintext)
 
-  # OpenSSL expects a 16-byte IV for ChaCha20; pad 12-byte nonce with 4 zero bytes
-  iv = chacha_nonce + "\x00" * 4
+  # OpenSSL expects a 16-byte IV for ChaCha20: [counter (4 bytes)][nonce (12 bytes)]
+  # RFC 8439 specifies counter should be 0 for the first block
+  iv = "\x00\x00\x00\x00" + chacha_nonce
 
   cipher = OpenSSL::Cipher.new('chacha20')
   cipher.encrypt
@@ -280,8 +289,9 @@ module Nostr
   calculated_mac = hmac_aad(hmac_key, ciphertext, nonce)
   raise ArgumentError, 'invalid MAC' unless secure_compare(calculated_mac, mac)
 
-  # OpenSSL expects a 16-byte IV for ChaCha20; pad 12-byte nonce with 4 zero bytes
-  iv = chacha_nonce + "\x00" * 4
+  # OpenSSL expects a 16-byte IV for ChaCha20: [counter (4 bytes)][nonce (12 bytes)]
+  # RFC 8439 specifies counter should be 0 for the first block
+  iv = "\x00\x00\x00\x00" + chacha_nonce
 
   cipher = OpenSSL::Cipher.new('chacha20')
   cipher.decrypt

@@ -641,6 +641,13 @@
           "plaintext": "3",
           "payload": "Ap/2SEZCVFIhYk6qx7nqJxM6TMI1ZoKmAzrO7vBDVJhhuZXWiM20i/tIsbjT0KxkJs2MZjh1oXNYMO9ggfk7i47WQA==",
           "note": "invalid payload length: 92"
+        },
+        {
+          "conversation_key": "c41c775356fd92eadc63ff5a0dc1da211b268cbea22316767095b2871ea1412d",
+          "nonce": "0000000000000000000000000000000000000000000000000000000000000001",
+          "plaintext": "a",
+          "payload": "AgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABee0G5VSK0_9YypIObAtDKfYEAjD35uVkHyB0F4DwrcNaCXlCWZKaArsGrY6M9wnuTMxWfp1RTN9Xga8no-kF5Vsb",
+          "note": "base64url format (- instead of +, _ instead of /) should be rejected"
         }
       ]
     }
