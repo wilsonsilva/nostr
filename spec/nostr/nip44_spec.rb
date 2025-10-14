@@ -152,12 +152,8 @@ RSpec.describe Nostr::Nip44 do
         conversation_key = [vector['conversation_key']].pack('H*')
         nonce = [vector['nonce']].pack('H*')
 
-        # For long messages, we just verify the pattern works
-        if vector['plaintext'] && vector['plaintext'].is_a?(String) && vector['plaintext'].match?(/^[0-9a-f]+$/)
-          plaintext = 'x' * vector['plaintext'].to_i(16)
-        else
-          next
-        end
+        # For long messages, construct from pattern and repeat
+        plaintext = vector['pattern'] * vector['repeat']
 
         encrypted = described_class.encrypt(plaintext, conversation_key, nonce)
         decrypted = described_class.decrypt(encrypted, conversation_key)
@@ -238,7 +234,7 @@ RSpec.describe Nostr::Nip44 do
       test_vectors['v2']['invalid']['get_conversation_key'].each do |vector|
         expect do
           described_class.get_conversation_key(vector['sec1'], vector['pub2'])
-        end.to raise_error(StandardError), "Expected error for: #{vector['note']}"
+        end.to raise_error(OpenSSL::PKey::EC::Point::Error), "Expected error for: #{vector['note']}"
       end
     end
   end

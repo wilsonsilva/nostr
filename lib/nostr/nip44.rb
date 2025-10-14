@@ -77,13 +77,15 @@ module Nostr
       raise ArgumentError, 'invalid padding: too short' if padded.length < 2
 
       unpadded_len = padded.unpack1('n') # Big-endian uint16
+      raise ArgumentError, 'invalid padding: unpadded length exceeds padded size' if unpadded_len > padded.length - 2
+
       unpadded = padded[2, unpadded_len]
 
       raise ArgumentError, 'invalid padding: zero length' if unpadded_len.zero?
       raise ArgumentError, 'invalid padding: length mismatch' if unpadded.nil? || unpadded.length != unpadded_len
 
-      expected_padded_len = 2 + calc_padded_len(unpadded_len)
-      raise ArgumentError, 'invalid padding: total length mismatch' if padded.length != expected_padded_len
+      expected_padded_len = calc_padded_len(unpadded_len)
+      raise ArgumentError, 'invalid padding: total length mismatch' if padded.length != (2 + expected_padded_len)
 
       unpadded.force_encoding('UTF-8')
     end
@@ -179,12 +181,16 @@ module Nostr
       public_key_bn = OpenSSL::BN.new("02#{public_key_hex}", 16)
       public_key_point = OpenSSL::PKey::EC::Point.new(group, public_key_bn)
 
-      # Create EC key from private key
+      # For OpenSSL 3.0+, we need to use ASN.1 DER encoding to create an immutable key
+      # However, we should use the generator point (not the recipient's public key) for the private key structure
+      generator = group.generator
+      our_public_key = generator.mul(private_key_bn)
+      
       asn1 = OpenSSL::ASN1::Sequence([
         OpenSSL::ASN1::Integer.new(1),
         OpenSSL::ASN1::OctetString(private_key_bn.to_s(2)),
         OpenSSL::ASN1::ObjectId('secp256k1', 0, :EXPLICIT),
-        OpenSSL::ASN1::BitString(public_key_point.to_octet_string(:uncompressed), 1, :EXPLICIT)
+        OpenSSL::ASN1::BitString(our_public_key.to_octet_string(:uncompressed), 1, :EXPLICIT)
       ])
 
       pkey = OpenSSL::PKey::EC.new(asn1.to_der)
