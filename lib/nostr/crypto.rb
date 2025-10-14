@@ -73,6 +73,48 @@ module Nostr
       plain_text.force_encoding('UTF-8')
     end
 
+    # Encrypts a piece of text using NIP-44 v2
+    #
+    # @api public
+    #
+    # @example Encrypting an event's content with NIP-44
+    #   crypto = Nostr::Crypto.new
+    #   sender_private_key = Nostr::PrivateKey.new('sender_private_key_hex')
+    #   recipient_public_key = Nostr::PublicKey.new('recipient_public_key_hex')
+    #   encrypted = crypto.encrypt_nip44(sender_private_key, recipient_public_key, 'Secret message')
+    #
+    # @param sender_private_key [PrivateKey] 32-bytes hex-encoded private key of the creator.
+    # @param recipient_public_key [PublicKey] 32-bytes hex-encoded public key of the recipient.
+    # @param plain_text [String] The text to be encrypted
+    #
+    # @return [String] Base64-encoded encrypted payload according to NIP-44 v2.
+    #
+    def encrypt_nip44(sender_private_key, recipient_public_key, plain_text)
+      conversation_key = Nip44.get_conversation_key(sender_private_key.to_s, recipient_public_key.to_s)
+      Nip44.encrypt(plain_text, conversation_key)
+    end
+
+    # Decrypts a NIP-44 v2 encrypted payload
+    #
+    # @api public
+    #
+    # @example Decrypting an event's content with NIP-44
+    #   crypto = Nostr::Crypto.new
+    #   recipient_private_key = Nostr::PrivateKey.new('recipient_private_key_hex')
+    #   sender_public_key = Nostr::PublicKey.new('sender_public_key_hex')
+    #   decrypted = crypto.decrypt_nip44(recipient_private_key, sender_public_key, encrypted_payload)
+    #
+    # @param recipient_private_key [PrivateKey] 32-bytes hex-encoded private key of the recipient.
+    # @param sender_public_key [PublicKey] 32-bytes hex-encoded public key of the message creator.
+    # @param encrypted_text [String] The Base64-encoded NIP-44 payload to be decrypted
+    #
+    # @return [String] Decrypted plaintext.
+    #
+    def decrypt_nip44(recipient_private_key, sender_public_key, encrypted_text)
+      conversation_key = Nip44.get_conversation_key(recipient_private_key.to_s, sender_public_key.to_s)
+      Nip44.decrypt(encrypted_text, conversation_key)
+    end
+
     # Uses the private key to generate an event id and sign the event
     #
     # @api public
