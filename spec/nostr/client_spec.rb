@@ -2,12 +2,20 @@
 
 require 'spec_helper'
 
-# This test suite does not use let blocks because they don't work with EventMachine.
-#
-# EventMachine is a pain to work with, hence the use of sleep statements and instance variables.
-# I'll come back to fix this once I'm more familiar with it.
-
 RSpec.describe Nostr::Client do
+  # Helper method to wait for a specific event to occur
+  def wait_for_event(timeout = 1)
+    start_time = Time.now
+    result = nil
+    
+    until result || (Time.now - start_time > timeout)
+      result = yield if block_given?
+      Thread.pass
+    end
+    
+    result
+  end
+
   def server(port)
     @echo_server = EchoServer.new
     @echo_server.listen(port)
@@ -43,9 +51,11 @@ RSpec.describe Nostr::Client do
       end
 
       client.connect(relay)
-      sleep 0.02
+      
+      # Wait for connection to be established
+      connected_result = wait_for_event { connected }
 
-      expect(connected).to be(true)
+      expect(connected_result).to be(true)
     end
   end
 
@@ -59,9 +69,11 @@ RSpec.describe Nostr::Client do
         end
 
         client.connect(relay)
-        sleep 0.02
+        
+        # Wait for connection to be established
+        relay_result = wait_for_event { connected_relay }
 
-        expect(connected_relay).to eq(relay)
+        expect(relay_result).to eq(relay)
       end
     end
 
@@ -74,14 +86,16 @@ RSpec.describe Nostr::Client do
         end
 
         client.connect(relay)
-
-        sleep 0.1
-
+        
+        # Wait for connection to be established
+        wait_for_event { client.instance_variable_get(:@connected) }
+        
         @echo_server.send('hello')
+        
+        # Wait for message to be received
+        message_result = wait_for_event { received_message }
 
-        sleep 0.1
-
-        expect(received_message).to eq('hello')
+        expect(message_result).to eq('hello')
       end
     end
 
@@ -96,10 +110,11 @@ RSpec.describe Nostr::Client do
         relay = Nostr::Relay.new(url: 'musk', name: 'localhost')
 
         client.connect(relay)
+        
+        # Wait for error event
+        error_result = wait_for_event { connection_error_event }
 
-        sleep 0.1
-
-        expect(connection_error_event).to eq('Network error: musk: musk is not a valid WebSocket URL')
+        expect(error_result).to eq('Network error: musk: musk is not a valid WebSocket URL')
       end
     end
 
@@ -114,12 +129,14 @@ RSpec.describe Nostr::Client do
         end
 
         client.connect(relay)
-
-        sleep 0.1
-
+        
+        # Wait for connection to be established
+        wait_for_event { client.instance_variable_get(:@connected) }
+        
         @echo_server.close(1000, 'We are done')
-
-        sleep 0.1
+        
+        # Wait for close event
+        wait_for_event { connection_closed_code && connection_closed_reason }
 
         aggregate_failures do
           expect(connection_closed_code).to eq(1000)
@@ -149,8 +166,9 @@ RSpec.describe Nostr::Client do
 
         relay = Nostr::Relay.new(url: plain_text_url, name: 'localhost')
         client.connect(relay)
-
-        sleep 0.01
+        
+        # Wait for subscription and message
+        wait_for_event { sent_message && subscription }
 
         aggregate_failures do
           expect(sent_message).to eq('["REQ","16605b59b539f6e86762f28fb57db2fd",{}]')
@@ -179,8 +197,9 @@ RSpec.describe Nostr::Client do
 
         relay = Nostr::Relay.new(url: plain_text_url, name: 'localhost')
         client.connect(relay)
-
-        sleep 0.01
+        
+        # Wait for subscription and message
+        wait_for_event { sent_message && subscription }
 
         aggregate_failures do
           expect(sent_message).to eq('["REQ","16605b59b539f6e86762f28fb57db2fd",{"since":1230981305}]')
@@ -209,8 +228,9 @@ RSpec.describe Nostr::Client do
 
         relay = Nostr::Relay.new(url: plain_text_url, name: 'localhost')
         client.connect(relay)
-
-        sleep 0.01
+        
+        # Wait for subscription and message
+        wait_for_event { sent_message && subscription }
 
         aggregate_failures do
           expect(sent_message).to eq('["REQ","16605b59b539f6e86762f28fb57db2fd",{"since":1230981305}]')
@@ -238,8 +258,9 @@ RSpec.describe Nostr::Client do
 
         relay = Nostr::Relay.new(url: plain_text_url, name: 'localhost')
         client.connect(relay)
-
-        sleep 0.01
+        
+        # Wait for subscription and message
+        wait_for_event { sent_message && subscription }
 
         aggregate_failures do
           expect(sent_message).to eq('["REQ","16605b59b539f6e86762f28fb57db2fd",{}]')
@@ -267,10 +288,11 @@ RSpec.describe Nostr::Client do
 
       relay = Nostr::Relay.new(url: plain_text_url, name: 'localhost')
       client.connect(relay)
+      
+      # Wait for message
+      message_result = wait_for_event { sent_message }
 
-      sleep 0.01
-
-      expect(sent_message).to eq(['CLOSE', { subscription_id: }].to_json)
+      expect(message_result).to eq(['CLOSE', { subscription_id: }].to_json)
     end
   end
 
@@ -300,10 +322,11 @@ RSpec.describe Nostr::Client do
       end
 
       client.connect(relay)
+      
+      # Wait for message
+      message_result = wait_for_event { received_message }
 
-      sleep 0.01
-
-      expect(received_message).to eq(['EVENT', event.to_h].to_json)
+      expect(message_result).to eq(['EVENT', event.to_h].to_json)
     end
   end
 end
